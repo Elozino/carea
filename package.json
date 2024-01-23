@@ -10,9 +10,13 @@
     "test": "jest"
   },
   "dependencies": {
+    "@react-three/drei": "^9.96.1",
+    "@react-three/fiber": "^8.15.14",
     "expo": "^50.0.2",
+    "expo-gl": "~13.6.0",
     "react": "18.2.0",
-    "react-native": "0.73.2"
+    "react-native": "0.73.2",
+    "three": "^0.160.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
