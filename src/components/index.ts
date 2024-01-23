@@ -1,4 +1,3 @@
 import OnBoardingScreen from './OnBoardingScreen';
 
-export { OnBoardingScreen };
-
+export {OnBoardingScreen};

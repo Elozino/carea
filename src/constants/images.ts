@@ -5,5 +5,5 @@ interface Images {
 }
 
 export const IMAGES: Images = {
-  onboarding:  require('../assets/images/onboarding1.jpg'),
+  onboarding: require('../assets/images/onboarding1.jpg'),
 };

@@ -1,8 +1,8 @@
 export const COLORS = {
   light: {
-    white: '#fffff8'
+    white: '#fffff8',
   },
   dark: {
-    white: '#000200'
+    white: '#000200',
   },
 };

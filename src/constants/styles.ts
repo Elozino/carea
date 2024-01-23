@@ -21,6 +21,4 @@ export const paddingSizes: PaddingType = {
   xxLarge: 60,
 };
 
-export const FONT_FAMILY = {
-  
-}
+export const FONT_FAMILY = {};
