@@ -1,15 +1,18 @@
-import {DimensionValue} from 'react-native';
+import {DimensionValue, Dimensions, PixelRatio} from 'react-native';
+
+const fontScale = PixelRatio.getFontScale();
+const getFontSize = (size: number) => size / fontScale;
 
 export const textSizes = {
-  xSmall: 8,
-  small: 8,
-  medium: 16,
-  large: 28,
-  xxLarge: 60,
+  xSmall: getFontSize(8),
+  small: getFontSize(8),
+  medium: getFontSize(16),
+  large: getFontSize(28),
+  xxLarge: getFontSize(60),
 };
 
 type PaddingType = {
-  [x: string]: DimensionValue;
+  [x: string]: DimensionValue,
 };
 
 export const paddingSizes: PaddingType = {
@@ -22,3 +25,17 @@ export const paddingSizes: PaddingType = {
 };
 
 export const FONT_FAMILY = {};
+
+export const widthAndHeight = {
+  full: '100%',
+  half: '50%',
+  third: '33.3333333333%',
+  twoThirds: '66.6666666667%',
+  quarter: '25%',
+  medium: 52,
+};
+
+export const {width: WINDOW_WIDTH, height: WINDOW_HEIGHT} =
+  Dimensions.get('window');
+export const {width: SCREEN_WIDTH, height: SCREEN_height} =
+  Dimensions.get('screen');
