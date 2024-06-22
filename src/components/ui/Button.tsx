@@ -11,11 +11,12 @@ import {textSizes, widthAndHeight} from '../../constants/styles';
 import useCareaTheme from '../../hooks/useCareaTheme';
 
 type IButton = PressableProps & {
-  style?: ViewStyle,
-  text: string,
-  textStyle?: TextStyle,
-  loading?: boolean,
-  onPress?: () => void,
+  style?: ViewStyle;
+  text?: string;
+  textStyle?: TextStyle;
+  loading?: boolean;
+  onPress?: () => void;
+  icon?: JSX.Element;
 };
 
 export const Button: FC<IButton> = ({
@@ -24,6 +25,7 @@ export const Button: FC<IButton> = ({
   loading,
   textStyle,
   onPress,
+  icon,
 }) => {
   const theme = useCareaTheme();
   return (
@@ -31,6 +33,7 @@ export const Button: FC<IButton> = ({
       onPress={onPress}
       style={[{backgroundColor: theme.btn_bg}, styles.btn, style]}
       disabled={loading}>
+      {icon}
       <Text style={[{color: theme.btn_text}, styles.text, textStyle]}>
         {text}
       </Text>
@@ -40,7 +43,7 @@ export const Button: FC<IButton> = ({
 
 const styles = StyleSheet.create({
   text: {
-    fontSize: textSizes.medium,
+    fontSize: textSizes.normal,
   },
   btn: {
     width: '100%',

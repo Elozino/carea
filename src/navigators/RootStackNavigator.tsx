@@ -1,15 +1,9 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
-import {Button} from '../components/ui/Button';
-import useCareaTheme from '../hooks/useCareaTheme';
+import {StyleSheet} from 'react-native';
+import AuthStackNavigator from './AuthStackNavigator';
 
 const RootStackNavigator = () => {
-  const theme = useCareaTheme();
-  return (
-    <View style={{backgroundColor: theme.bg_1, ...styles.container}}>
-      <Button text={'Goodssss'} />
-    </View>
-  );
+  return <AuthStackNavigator />;
 };
 
 export default RootStackNavigator;

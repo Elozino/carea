@@ -18,7 +18,7 @@ const useCareaTheme = () => {
   const handleAppearanceChange = ({
     colorScheme,
   }: {
-    colorScheme: ColorSchemeName,
+    colorScheme: ColorSchemeName;
   }) => {
     setTheme(colorScheme === 'dark' ? 'dark' : 'light');
   };

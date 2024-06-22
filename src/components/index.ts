@@ -1,3 +1,3 @@
-import OnBoardingScreen from './OnBoardingScreen';
+import AppTextInput from './ui/AppTextInput';
 
-export {OnBoardingScreen};
+export {AppTextInput};

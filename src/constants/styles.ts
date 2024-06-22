@@ -1,18 +1,20 @@
-import {DimensionValue, Dimensions, PixelRatio} from 'react-native';
+import {DimensionValue, Dimensions, PixelRatio, StyleSheet} from 'react-native';
 
 const fontScale = PixelRatio.getFontScale();
-const getFontSize = (size: number) => size / fontScale;
+export const getFontSize = (size: number) => size / fontScale;
 
 export const textSizes = {
-  xSmall: getFontSize(8),
+  xSmall: getFontSize(4),
   small: getFontSize(8),
-  medium: getFontSize(16),
-  large: getFontSize(28),
-  xxLarge: getFontSize(60),
+  base: getFontSize(14),
+  normal: getFontSize(16),
+  medium: getFontSize(20),
+  large: getFontSize(42),
+  xxLarge: getFontSize(80),
 };
 
 type PaddingType = {
-  [x: string]: DimensionValue,
+  [x: string]: DimensionValue;
 };
 
 export const paddingSizes: PaddingType = {
@@ -34,6 +36,21 @@ export const widthAndHeight = {
   quarter: '25%',
   medium: 52,
 };
+
+export const globalStyle = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  title: {
+    textAlign: 'center',
+    fontSize: textSizes.large,
+    fontWeight: '500',
+    marginVertical: paddingSizes.medium,
+  },
+  formWrapper: {
+    gap: 12,
+  },
+});
 
 export const {width: WINDOW_WIDTH, height: WINDOW_HEIGHT} =
   Dimensions.get('window');

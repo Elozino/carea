@@ -1,12 +1,27 @@
-import {StyleSheet, Text, View, ImageBackground, StatusBar} from 'react-native';
-import React from 'react';
-import {IMAGES} from '../constants/images';
+import React, {useEffect} from 'react';
+import {ImageBackground, StatusBar, StyleSheet, Text, View} from 'react-native';
 import {paddingSizes, textSizes} from '../constants/styles';
+import {useNavigation} from '@react-navigation/native';
 
-const OnBoardingScreen = () => {
+const Welcome = () => {
+  const {navigate} = useNavigation();
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      navigate('');
+    }, 2000);
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [navigate]);
+
   return (
     <>
-      <StatusBar translucent backgroundColor="transparent" />
+      <StatusBar
+        translucent
+        backgroundColor="transparent"
+        barStyle={'default'}
+      />
       <ImageBackground
         source={require('../assets/images/onboarding1.jpg')}
         style={styles.container}
@@ -26,7 +41,7 @@ const OnBoardingScreen = () => {
   );
 };
 
-export default OnBoardingScreen;
+export default Welcome;
 
 const styles = StyleSheet.create({
   container: {
@@ -40,10 +55,11 @@ const styles = StyleSheet.create({
   },
   welcomeText: {
     fontSize: textSizes.large,
+    fontWeight: '700',
   },
   brandName: {
     fontSize: textSizes.xxLarge,
-    fontWeight: '600',
+    fontWeight: '800',
   },
   description: {
     fontSize: textSizes.medium,
