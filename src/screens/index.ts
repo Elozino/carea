@@ -4,5 +4,6 @@ import Login from './auth/Login';
 import CreateAccount from './auth/CreateAccount';
 import Auth from './auth/Auth';
 import ProfileForm from './auth/ProfileForm';
+import Home from './app/home/Home';
 
-export {Welcome, GetStarted, Login, CreateAccount, Auth, ProfileForm};
+export {Welcome, GetStarted, Login, CreateAccount, Auth, ProfileForm, Home};

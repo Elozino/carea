@@ -27,6 +27,7 @@ const AppTextInput = ({
       {leftIcon}
       <TextInput
         placeholder={placeholder}
+        placeholderTextColor={theme.text_3}
         value={value}
         onChangeText={onChangeText}
         secureTextEntry={secureTextEntry}
@@ -42,7 +43,6 @@ export default AppTextInput;
 
 const styles = StyleSheet.create({
   wrapper: {
-    // flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: paddingSizes.small,
