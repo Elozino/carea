@@ -21,7 +21,7 @@ type Blur = BlurTint | 'dark' | 'light';
 const TabBG = () => (
   <BlurView
     tint={Appearance.getColorScheme() as Blur}
-    intensity={40}
+    intensity={100}
     style={StyleSheet.absoluteFill}
   />
 );
@@ -44,7 +44,7 @@ const BottomNavigator = () => {
           shadowOpacity: 0,
           elevation: 0,
           height: Platform.OS === 'ios' ? 100 : 70,
-          backgroundColor: theme.bg_1,
+          borderTopWidth: 0,
         },
         tabBarActiveTintColor: theme.btn_bg,
         tabBarBackground: TabBG,
