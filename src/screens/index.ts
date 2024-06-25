@@ -5,5 +5,21 @@ import CreateAccount from './auth/CreateAccount';
 import Auth from './auth/Auth';
 import ProfileForm from './auth/ProfileForm';
 import Home from './app/home/Home';
+import Notification from './app/home/Notification';
+import ProductDetails from './app/home/ProductDetails';
+import WishList from './app/home/WishList';
+import SearchProduct from './app/home/SearchProduct';
 
-export {Welcome, GetStarted, Login, CreateAccount, Auth, ProfileForm, Home};
+export {
+  Welcome,
+  GetStarted,
+  Login,
+  CreateAccount,
+  Auth,
+  ProfileForm,
+  Home,
+  Notification,
+  ProductDetails,
+  WishList,
+  SearchProduct,
+};

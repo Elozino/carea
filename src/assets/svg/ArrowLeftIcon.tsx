@@ -21,7 +21,7 @@ const ArrowLeftIcon = props => {
       height={calculatedHeight}
       {...props}>
       <Path
-        stroke="#000"
+        stroke={props.fill ?? '#000'}
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth={2}

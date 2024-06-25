@@ -1,11 +1,13 @@
-import {StyleSheet, Text, TextInput, TextInputProps, View} from 'react-native';
+import { Pressable, StyleSheet, Text, TextInput, TextInputProps, View, ViewStyle } from 'react-native';
 import React from 'react';
 import useCareaTheme from '../../hooks/useCareaTheme';
-import {paddingSizes, textSizes} from '../../constants/styles';
+import { paddingSizes, textSizes } from '../../constants/styles';
 
 type AppTextInputProps = TextInputProps & {
   leftIcon?: JSX.Element;
   rightIcon?: JSX.Element;
+  style?: ViewStyle;
+  onPress?: () => void;
 };
 
 const AppTextInput = ({
@@ -16,13 +18,17 @@ const AppTextInput = ({
   placeholder,
   leftIcon,
   rightIcon,
+  style,
+  onPress,
 }: AppTextInputProps) => {
   const theme = useCareaTheme();
   return (
-    <View
+    <Pressable
+      onPress={onPress}
       style={[
         styles.wrapper,
-        {backgroundColor: theme.bg_2, borderColor: theme.btn_bg},
+        { backgroundColor: theme.bg_2, borderColor: theme.btn_bg },
+        style,
       ]}>
       {leftIcon}
       <TextInput
@@ -32,10 +38,10 @@ const AppTextInput = ({
         onChangeText={onChangeText}
         secureTextEntry={secureTextEntry}
         editable={editable}
-        style={[styles.input, {borderColor: theme.btn_bg}]}
+        style={[styles.input, { borderColor: theme.btn_bg }]}
       />
       {rightIcon}
-    </View>
+    </Pressable>
   );
 };
 

@@ -1,4 +1,8 @@
 /* eslint-disable react-native/no-inline-styles */
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import React from 'react';
 import {
   Image,
   Pressable,
@@ -7,30 +11,29 @@ import {
   Text,
   View,
 } from 'react-native';
-import React from 'react';
+import { FilterIcon, LikeIcon, NotificationIcon, SearchIcon } from '../../../assets/svg';
+import FlexTitle from '../../../components/FlexTitle';
+import { brands } from '../../../constants/data';
+import { ROUTES } from '../../../constants/enums';
+import { globalStyle, paddingSizes, textSizes } from '../../../constants/styles';
 import useCareaTheme from '../../../hooks/useCareaTheme';
-import {useNavigation} from '@react-navigation/native';
-import {globalStyle, paddingSizes, textSizes} from '../../../constants/styles';
-import {LikeIcon, NotificationIcon} from '../../../assets/svg';
-import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
+import { HomeStackParams } from '../../../types/navigation';
+import AppTextInput from '../../../components/ui/AppTextInput';
 
 const Home = () => {
   const theme = useCareaTheme();
-  const {navigate} = useNavigation();
+  const { navigate } =
+    useNavigation<NativeStackNavigationProp<HomeStackParams>>();
   const bottomHeight = useBottomTabBarHeight();
   return (
-    <View
-      style={[
-        globalStyle.container,
-        styles.wrapper,
-        {backgroundColor: theme.bg_1},
-      ]}>
+    <View style={[globalStyle.container, { backgroundColor: theme.bg_1 }]}>
       <ScrollView
+        style={{ flex: 1 }}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
           paddingBottom: bottomHeight + Number(paddingSizes.medium),
         }}>
-        <View style={styles.headerWrapper}>
+        <View style={[styles.headerWrapper, styles.wrapper]}>
           <View style={styles.profileWrapper}>
             <Image
               source={{
@@ -40,7 +43,7 @@ const Home = () => {
               resizeMode="cover"
             />
             <View>
-              <Text style={[{color: theme.text_1}]}>Good Morning 👋</Text>
+              <Text style={[{ color: theme.text_1 }]}>Good Morning 👋</Text>
               <Text
                 style={[
                   {
@@ -55,55 +58,199 @@ const Home = () => {
             </View>
           </View>
           <View style={styles.headerIcons}>
-            <Pressable>
+            <Pressable onPress={() => navigate(ROUTES.NOTIFICATION)}>
               <NotificationIcon width={30} height={30} fill={theme.btn_bg} />
             </Pressable>
-            <Pressable>
+            <Pressable onPress={() => navigate(ROUTES.WISH_LIST)}>
               <LikeIcon width={30} height={25} fill={theme.btn_bg} />
             </Pressable>
           </View>
         </View>
-        {/* {Array(20)
-          .fill(0)
-          .map(item => (
-            <View style={styles.headerWrapper}>
-              <View style={styles.profileWrapper}>
-                <Image
-                  source={{
-                    uri: 'https://avatars.githubusercontent.com/u/66180398?v=4',
-                  }}
-                  style={styles.profileImg}
-                  resizeMode="cover"
-                />
-                <View>
-                  <Text style={[{color: theme.text_1}]}>Good Morning 👋</Text>
+
+        <View>
+          <AppTextInput
+            leftIcon={<SearchIcon />}
+            rightIcon={<FilterIcon />}
+            style={{
+              marginHorizontal: paddingSizes.medium,
+              marginTop: paddingSizes.large,
+              marginBottom: paddingSizes.small,
+            }}
+            editable={false}
+            onPress={() => navigate(ROUTES.SEARCH_PRODUCT)}
+          />
+        </View>
+
+        {/* special offer */}
+        <View style={styles.wrapper}>
+          <FlexTitle
+            title="Special Offers"
+            btnTitle="See All"
+            onPress={() => {
+              ('');
+            }}
+          />
+        </View>
+        <View
+          style={[styles.specialOfferWrapper, { backgroundColor: theme.bg_2 }]}>
+          <View style={{ flex: 0.5, gap: 10 }}>
+            <Text
+              style={[
+                {
+                  color: theme.black,
+                  fontSize: textSizes.large,
+                  fontWeight: '700',
+                },
+              ]}>
+              20%
+            </Text>
+            <Text
+              style={[
+                {
+                  color: theme.black,
+                  fontSize: textSizes.medium,
+                  fontWeight: '700',
+                },
+              ]}>
+              Week Deals
+            </Text>
+            <Text style={[{ color: theme.black, fontSize: textSizes.base }]}>
+              Get a new car discount only valid this week
+            </Text>
+          </View>
+          <View style={styles.specialOfferImgWarapper}>
+            <Image
+              source={require('../../../assets/images/car.png')}
+              resizeMode="cover"
+              style={styles.specialOfferImg}
+            />
+          </View>
+        </View>
+
+        {/* top deals */}
+        <View style={styles.wrapper}>
+          <FlexTitle
+            title="Top Deals"
+            btnTitle="See All"
+            onPress={() => {
+              ('');
+            }}
+          />
+        </View>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{
+            gap: 10,
+            paddingHorizontal: paddingSizes.medium,
+          }}
+          bounces={false}>
+          {brands.map((item, index) => (
+            <Pressable
+              key={item + index}
+              style={{
+                paddingVertical: 8,
+                paddingHorizontal: 20,
+                borderWidth: 0.8,
+                borderColor: theme.btn_bg,
+                borderRadius: 100,
+              }}>
+              <Text style={[{ color: theme.text_1, fontSize: textSizes.base }]}>
+                {item}
+              </Text>
+            </Pressable>
+          ))}
+        </ScrollView>
+        <ScrollView
+          contentContainerStyle={{
+            justifyContent: 'space-between',
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            gap: 10,
+            marginTop: paddingSizes.medium,
+            paddingHorizontal: paddingSizes.medium,
+          }}>
+          {Array(10)
+            .fill(0)
+            .map((item, index) => (
+              <View style={{ width: '48%' }} key={index + item}>
+                <View
+                  style={[
+                    {
+                      backgroundColor: theme.bg_2,
+                      width: '100%',
+                      height: 150,
+                      borderRadius: 20,
+                      padding: paddingSizes.medium,
+                      position: 'relative',
+                    },
+                  ]}>
+                  <Image
+                    source={require('../../../assets/images/car.png')}
+                    resizeMode="cover"
+                    style={{ width: '100%', height: '100%' }}
+                  />
+                  <View
+                    style={{
+                      position: 'absolute',
+                      top: paddingSizes.medium,
+                      right: paddingSizes.medium,
+                    }}>
+                    <LikeIcon width={30} height={25} fill={theme.btn_bg} />
+                  </View>
+                </View>
+                <View style={{ gap: 3, marginTop: paddingSizes.small }}>
                   <Text
-                    style={[
-                      {
-                        color: theme.text_1,
-                        fontWeight: '800',
-                        fontSize: textSizes.medium,
-                        letterSpacing: 0.6,
-                      },
-                    ]}>
-                    Elozino Ovedhe
+                    style={{
+                      fontSize: textSizes.normal,
+                      fontWeight: '700',
+                      color: theme.btn_bg,
+                    }}>
+                    BMW M4 Series
+                  </Text>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      gap: 14,
+                    }}>
+                    <Text>Star</Text>
+                    <Text>4.5</Text>
+                    <View
+                      style={{
+                        backgroundColor: theme.btn_bg,
+                        width: 1,
+                        height: 15,
+                      }}
+                    />
+                    <View
+                      style={{
+                        backgroundColor: theme.bg_2,
+                        paddingHorizontal: paddingSizes.small,
+                        paddingVertical: paddingSizes.xSmall,
+                        borderRadius: 5,
+                      }}>
+                      <Text
+                        style={{
+                          fontSize: textSizes.base,
+                          color: theme.black,
+                        }}>
+                        New
+                      </Text>
+                    </View>
+                  </View>
+                  <Text
+                    style={{
+                      fontSize: textSizes.medium,
+                      fontWeight: '700',
+                      color: theme.btn_bg,
+                    }}>
+                    $155,000
                   </Text>
                 </View>
               </View>
-              <View style={styles.headerIcons}>
-                <Pressable>
-                  <NotificationIcon
-                    width={30}
-                    height={30}
-                    fill={theme.btn_bg}
-                  />
-                </Pressable>
-                <Pressable>
-                  <LikeIcon width={30} height={25} fill={theme.btn_bg} />
-                </Pressable>
-              </View>
-            </View>
-          ))} */}
+            ))}
+        </ScrollView>
       </ScrollView>
     </View>
   );
@@ -136,4 +283,25 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     gap: 10,
   },
+  specialOfferWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderRadius: 20,
+    padding: paddingSizes.medium,
+    position: 'relative',
+    height: 200,
+    marginHorizontal: paddingSizes.medium,
+  },
+  specialOfferImgWarapper: {
+    flex: 0.5,
+    position: 'absolute',
+    top: 50,
+    right: 0,
+  },
+  specialOfferImg: {
+    width: 220,
+    height: 100,
+  },
+  topDealsScroll: {},
 });

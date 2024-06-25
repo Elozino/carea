@@ -13,6 +13,8 @@ import WalletIcon from './WalletIcon';
 import ChatIcon from './ChatIcon';
 import NotificationIcon from './NotificationIcon';
 import LikeIcon from './LikeIcon';
+import FilterIcon from './FilterIcon';
+import SearchIcon from './SearchIcon';
 
 export {
   GoogleIcon,
@@ -30,4 +32,6 @@ export {
   ChatIcon,
   NotificationIcon,
   LikeIcon,
+  FilterIcon,
+  SearchIcon,
 };

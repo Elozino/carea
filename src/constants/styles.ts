@@ -20,7 +20,7 @@ type PaddingType = {
 export const paddingSizes: PaddingType = {
   xSmall: 4,
   small: 10,
-  medium: 20,
+  medium: 16,
   large: 30,
   xLarge: 40,
   xxLarge: 60,
