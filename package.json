@@ -12,7 +12,8 @@
     "clean-gradlew": "cd android && ./gradlew clean && cd ..",
     "clean-run-android": "cd android && ./gradlew clean && yarn android",
     "find-port": "netstat -ano | findstr :8081",
-    "killPID": "taskkill /F /PID"
+    "killPID": "taskkill /F /PID",
+    "prepare": "husky"
   },
   "dependencies": {
     "@react-navigation/bottom-tabs": "^6.5.20",
@@ -44,6 +45,7 @@
     "@types/three": "^0.160.0",
     "babel-jest": "^29.6.3",
     "eslint": "^8.19.0",
+    "husky": "^9.0.11",
     "jest": "^29.6.3",
     "prettier": "2.8.8",
     "react-native-svg-transformer": "^1.4.0",
