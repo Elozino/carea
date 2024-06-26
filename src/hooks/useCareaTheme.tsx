@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useLayoutEffect, useState} from 'react';
 import {Appearance, ColorSchemeName} from 'react-native';
 import {COLORS} from '../constants/colors';
 
@@ -7,9 +7,8 @@ const useCareaTheme = () => {
     Appearance.getColorScheme() ?? 'light',
   );
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const subscription = Appearance.addChangeListener(handleAppearanceChange);
-
     return () => {
       subscription.remove();
     };

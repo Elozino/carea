@@ -8,7 +8,7 @@ import {useNavigation} from '@react-navigation/native';
 
 const GetStarted = () => {
   const theme = useCareaTheme();
-  const [activeIndex, setActiveIndex] = useState<number>(0);
+  const [activeIndex, setActiveIndex] = useState < number > 0;
   const {navigate} = useNavigation();
 
   return (

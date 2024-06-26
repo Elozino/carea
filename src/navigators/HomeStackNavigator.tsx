@@ -4,6 +4,7 @@ import {ROUTES} from '../constants/enums';
 import {
   Home,
   Notification,
+  ProductDetails,
   SearchProduct,
   SpecialOffer,
   TopDeals,
@@ -20,6 +21,7 @@ const HomeStackNavigator = () => {
       <Stack.Screen name={ROUTES.WISH_LIST} component={WishList} />
       <Stack.Screen name={ROUTES.TOP_DEALS} component={TopDeals} />
       <Stack.Screen name={ROUTES.SPECIAL_OFFER} component={SpecialOffer} />
+      <Stack.Screen name={ROUTES.PRODUCT_DETAILS} component={ProductDetails} />
       <Stack.Group
         screenOptions={{
           presentation: 'transparentModal',

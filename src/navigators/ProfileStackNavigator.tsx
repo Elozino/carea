@@ -1,11 +1,15 @@
-import {View, Text} from 'react-native';
 import React from 'react';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {Profile} from '../screens';
+import {ROUTES} from '../constants/enums';
+
+const Stack = createNativeStackNavigator();
 
 const ProfileStackNavigator = () => {
   return (
-    <View>
-      <Text>ProfileStackNavigator</Text>
-    </View>
+    <Stack.Navigator screenOptions={{headerShown: false}}>
+      <Stack.Screen name={ROUTES.PROFILE} component={Profile} />
+    </Stack.Navigator>
   );
 };
 

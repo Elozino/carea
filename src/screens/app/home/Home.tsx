@@ -24,6 +24,17 @@ import {globalStyle, paddingSizes, textSizes} from '../../../constants/styles';
 import useCareaTheme from '../../../hooks/useCareaTheme';
 import {HomeStackParams} from '../../../types/navigation';
 import AppTextInput from '../../../components/ui/AppTextInput';
+import Animated, {SharedTransition, withSpring} from 'react-native-reanimated';
+
+const customTransition = SharedTransition.custom(values => {
+  'worklet';
+  return {
+    height: withSpring(values.targetHeight),
+    width: withSpring(values.targetWidth),
+    originX: withSpring(values.targetOriginX),
+    originY: withSpring(values.targetOriginY),
+  };
+});
 
 const Home = () => {
   const theme = useCareaTheme();
@@ -171,7 +182,10 @@ const Home = () => {
           {Array(10)
             .fill(0)
             .map((item, index) => (
-              <View style={{width: '48%'}} key={index + item}>
+              <Pressable
+                onPress={() => navigate(ROUTES.PRODUCT_DETAILS)}
+                style={{width: '48%'}}
+                key={index + item}>
                 <View
                   style={[
                     {
@@ -183,10 +197,12 @@ const Home = () => {
                       position: 'relative',
                     },
                   ]}>
-                  <Image
+                  <Animated.Image
                     source={require('../../../assets/images/car.png')}
                     resizeMode="cover"
                     style={{width: '100%', height: '100%'}}
+                    sharedTransitionTag={`product-${index}`}
+                    sharedTransitionStyle={customTransition}
                   />
                   <View
                     style={{
@@ -246,7 +262,7 @@ const Home = () => {
                     $155,000
                   </Text>
                 </View>
-              </View>
+              </Pressable>
             ))}
         </ScrollView>
       </ScrollView>

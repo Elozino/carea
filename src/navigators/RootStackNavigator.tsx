@@ -1,16 +1,16 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
-import AuthStackNavigator from './AuthStackNavigator';
+import {View} from 'react-native';
 import BottomNavigator from './BottomNavigator';
+import useCareaTheme from '../hooks/useCareaTheme';
+import {globalStyle} from '../constants/styles';
 
 const RootStackNavigator = () => {
-  return <BottomNavigator />;
+  const theme = useCareaTheme();
+  return (
+    <View style={{backgroundColor: theme.bg_1, ...globalStyle.container}}>
+      <BottomNavigator />
+    </View>
+  );
 };
 
 export default RootStackNavigator;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});

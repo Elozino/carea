@@ -13,6 +13,10 @@ import {
 import {ROUTES} from '../constants/enums';
 import useCareaTheme from '../hooks/useCareaTheme';
 import HomeStackNavigator from './HomeStackNavigator';
+import OrdersStackNavigator from './OrdersStackNavigator';
+import InboxStackNavigator from './InboxStackNavigator';
+import WalletStackNavigator from './WalletStackNavigator';
+import ProfileStackNavigator from './ProfileStackNavigator';
 
 const Tab = createBottomTabNavigator();
 
@@ -64,7 +68,7 @@ const BottomNavigator = () => {
       />
       <Tab.Screen
         name="Orders"
-        component={HomeStackNavigator}
+        component={OrdersStackNavigator}
         options={{
           tabBarIcon: ({focused}) => (
             <OrderIcon
@@ -77,7 +81,7 @@ const BottomNavigator = () => {
       />
       <Tab.Screen
         name="Inbox"
-        component={HomeStackNavigator}
+        component={InboxStackNavigator}
         options={{
           tabBarIcon: ({focused}) => (
             <ChatIcon
@@ -90,7 +94,7 @@ const BottomNavigator = () => {
       />
       <Tab.Screen
         name="Wallet"
-        component={HomeStackNavigator}
+        component={WalletStackNavigator}
         options={{
           tabBarIcon: ({focused}) => (
             <WalletIcon
@@ -103,7 +107,7 @@ const BottomNavigator = () => {
       />
       <Tab.Screen
         name="Profile"
-        component={HomeStackNavigator}
+        component={ProfileStackNavigator}
         options={{
           tabBarIcon: ({focused}) => (
             <AvatarIcon
@@ -119,17 +123,3 @@ const BottomNavigator = () => {
 };
 
 export default BottomNavigator;
-
-const styles = StyleSheet.create({
-  tabBar: {
-    height: 70,
-    position: 'absolute',
-    // bottom: 25,
-    // marginHorizontal: 16,
-    // borderRadius: 16,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderWidth: 0.5,
-    borderColor: '#dadada',
-  },
-});

@@ -17,14 +17,14 @@ const SpecialOffer = () => {
     <View style={[globalStyle.container, {backgroundColor: theme.bg_1}]}>
       <Topbar
         text={'Special Offers'}
-        leftIcon={<ArrowLeftIcon fill={theme.btn_bg}  />}
+        leftIcon={<ArrowLeftIcon fill={theme.btn_bg} />}
         leftIconAction={goBack}
       />
       <Text>SearchProduct</Text>
     </View>
   );
-}
+};
 
-export default SpecialOffer
+export default SpecialOffer;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

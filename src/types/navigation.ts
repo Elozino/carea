@@ -5,4 +5,5 @@ export type HomeStackParams = {
   SEARCH_PRODUCT: undefined;
   SPECIAL_OFFER: undefined;
   TOP_DEALS: undefined;
+  PRODUCT_DETAILS: undefined;
 };

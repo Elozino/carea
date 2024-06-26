@@ -11,6 +11,10 @@ import WishList from './app/home/WishList';
 import SearchProduct from './app/home/SearchProduct';
 import SpecialOffer from './app/home/SpecialOffer';
 import TopDeals from './app/home/TopDeals';
+import Inbox from './app/chats/Inbox';
+import Profile from './app/profile/Profile';
+import Wallet from './app/wallet/Wallet';
+import Orders from './app/orders/Orders';
 
 export {
   Welcome,
@@ -26,4 +30,8 @@ export {
   SearchProduct,
   SpecialOffer,
   TopDeals,
+  Inbox,
+  Profile,
+  Wallet,
+  Orders,
 };
