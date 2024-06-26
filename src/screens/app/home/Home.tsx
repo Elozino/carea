@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
-import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import React from 'react';
 import {
   Image,
@@ -11,24 +11,29 @@ import {
   Text,
   View,
 } from 'react-native';
-import { FilterIcon, LikeIcon, NotificationIcon, SearchIcon } from '../../../assets/svg';
+import {
+  FilterIcon,
+  LikeIcon,
+  NotificationIcon,
+  SearchIcon,
+} from '../../../assets/svg';
 import FlexTitle from '../../../components/FlexTitle';
-import { brands } from '../../../constants/data';
-import { ROUTES } from '../../../constants/enums';
-import { globalStyle, paddingSizes, textSizes } from '../../../constants/styles';
+import {brands} from '../../../constants/data';
+import {ROUTES} from '../../../constants/enums';
+import {globalStyle, paddingSizes, textSizes} from '../../../constants/styles';
 import useCareaTheme from '../../../hooks/useCareaTheme';
-import { HomeStackParams } from '../../../types/navigation';
+import {HomeStackParams} from '../../../types/navigation';
 import AppTextInput from '../../../components/ui/AppTextInput';
 
 const Home = () => {
   const theme = useCareaTheme();
-  const { navigate } =
+  const {navigate} =
     useNavigation<NativeStackNavigationProp<HomeStackParams>>();
   const bottomHeight = useBottomTabBarHeight();
   return (
-    <View style={[globalStyle.container, { backgroundColor: theme.bg_1 }]}>
+    <View style={[globalStyle.container, {backgroundColor: theme.bg_1}]}>
       <ScrollView
-        style={{ flex: 1 }}
+        style={{flex: 1}}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
           paddingBottom: bottomHeight + Number(paddingSizes.medium),
@@ -43,7 +48,7 @@ const Home = () => {
               resizeMode="cover"
             />
             <View>
-              <Text style={[{ color: theme.text_1 }]}>Good Morning 👋</Text>
+              <Text style={[{color: theme.text_1}]}>Good Morning 👋</Text>
               <Text
                 style={[
                   {
@@ -69,6 +74,7 @@ const Home = () => {
 
         <View>
           <AppTextInput
+            placeholder="Search Product"
             leftIcon={<SearchIcon />}
             rightIcon={<FilterIcon />}
             style={{
@@ -82,18 +88,14 @@ const Home = () => {
         </View>
 
         {/* special offer */}
-        <View style={styles.wrapper}>
-          <FlexTitle
-            title="Special Offers"
-            btnTitle="See All"
-            onPress={() => {
-              ('');
-            }}
-          />
-        </View>
+        <FlexTitle
+          title="Special Offers"
+          btnTitle="See All"
+          onPress={() => navigate(ROUTES.SPECIAL_OFFER)}
+        />
         <View
-          style={[styles.specialOfferWrapper, { backgroundColor: theme.bg_2 }]}>
-          <View style={{ flex: 0.5, gap: 10 }}>
+          style={[styles.specialOfferWrapper, {backgroundColor: theme.bg_2}]}>
+          <View style={{flex: 0.5, gap: 10}}>
             <Text
               style={[
                 {
@@ -114,7 +116,7 @@ const Home = () => {
               ]}>
               Week Deals
             </Text>
-            <Text style={[{ color: theme.black, fontSize: textSizes.base }]}>
+            <Text style={[{color: theme.black, fontSize: textSizes.base}]}>
               Get a new car discount only valid this week
             </Text>
           </View>
@@ -128,15 +130,11 @@ const Home = () => {
         </View>
 
         {/* top deals */}
-        <View style={styles.wrapper}>
-          <FlexTitle
-            title="Top Deals"
-            btnTitle="See All"
-            onPress={() => {
-              ('');
-            }}
-          />
-        </View>
+        <FlexTitle
+          title="Top Deals"
+          btnTitle="See All"
+          onPress={() => navigate(ROUTES.TOP_DEALS)}
+        />
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
@@ -155,7 +153,7 @@ const Home = () => {
                 borderColor: theme.btn_bg,
                 borderRadius: 100,
               }}>
-              <Text style={[{ color: theme.text_1, fontSize: textSizes.base }]}>
+              <Text style={[{color: theme.text_1, fontSize: textSizes.base}]}>
                 {item}
               </Text>
             </Pressable>
@@ -173,7 +171,7 @@ const Home = () => {
           {Array(10)
             .fill(0)
             .map((item, index) => (
-              <View style={{ width: '48%' }} key={index + item}>
+              <View style={{width: '48%'}} key={index + item}>
                 <View
                   style={[
                     {
@@ -188,7 +186,7 @@ const Home = () => {
                   <Image
                     source={require('../../../assets/images/car.png')}
                     resizeMode="cover"
-                    style={{ width: '100%', height: '100%' }}
+                    style={{width: '100%', height: '100%'}}
                   />
                   <View
                     style={{
@@ -199,7 +197,7 @@ const Home = () => {
                     <LikeIcon width={30} height={25} fill={theme.btn_bg} />
                   </View>
                 </View>
-                <View style={{ gap: 3, marginTop: paddingSizes.small }}>
+                <View style={{gap: 3, marginTop: paddingSizes.small}}>
                   <Text
                     style={{
                       fontSize: textSizes.normal,

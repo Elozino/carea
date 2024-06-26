@@ -19,10 +19,10 @@ export default FlexTitle;
 
 const styles = StyleSheet.create({
   wrapper: {
-    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    paddingHorizontal: paddingSizes.medium,
   },
   title: {
     fontSize: textSizes.normal,

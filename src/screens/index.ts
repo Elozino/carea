@@ -9,6 +9,8 @@ import Notification from './app/home/Notification';
 import ProductDetails from './app/home/ProductDetails';
 import WishList from './app/home/WishList';
 import SearchProduct from './app/home/SearchProduct';
+import SpecialOffer from './app/home/SpecialOffer';
+import TopDeals from './app/home/TopDeals';
 
 export {
   Welcome,
@@ -22,4 +24,6 @@ export {
   ProductDetails,
   WishList,
   SearchProduct,
+  SpecialOffer,
+  TopDeals,
 };
