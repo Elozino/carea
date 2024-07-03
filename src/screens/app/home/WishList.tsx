@@ -1,15 +1,17 @@
 /* eslint-disable react-native/no-inline-styles */
-import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {Image, ScrollView, Text, View} from 'react-native';
 import React from 'react';
 import Topbar from '../../../components/Topbar';
 import {ArrowLeftIcon, LikeIcon} from '../../../assets/svg';
 import {globalStyle, paddingSizes, textSizes} from '../../../constants/styles';
 import {useNavigation} from '@react-navigation/native';
 import useCareaTheme from '../../../hooks/useCareaTheme';
+import useHideBottomBar from '../../../hooks/useHideBottomTab';
 
 const WishList = () => {
   const theme = useCareaTheme();
   const {goBack} = useNavigation();
+  useHideBottomBar();
   return (
     <View style={[globalStyle.container, {backgroundColor: theme.bg_1}]}>
       <Topbar
@@ -23,7 +25,8 @@ const WishList = () => {
           flexDirection: 'row',
           flexWrap: 'wrap',
           gap: 10,
-          marginTop: Number(paddingSizes.medium) / 2,
+          paddingTop: Number(paddingSizes.medium) / 2,
+          paddingBottom: Number(paddingSizes.medium),
           paddingHorizontal: paddingSizes.medium,
         }}>
         {Array(10)
@@ -122,5 +125,3 @@ const WishList = () => {
 };
 
 export default WishList;
-
-const styles = StyleSheet.create({});

@@ -15,6 +15,7 @@ import NotificationIcon from './NotificationIcon';
 import LikeIcon from './LikeIcon';
 import FilterIcon from './FilterIcon';
 import SearchIcon from './SearchIcon';
+import TelephoneIcon from './TelephoneIcon';
 
 export {
   GoogleIcon,
@@ -34,4 +35,5 @@ export {
   LikeIcon,
   FilterIcon,
   SearchIcon,
+  TelephoneIcon,
 };

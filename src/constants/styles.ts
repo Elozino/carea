@@ -9,6 +9,7 @@ export const textSizes = {
   base: getFontSize(14),
   normal: getFontSize(16),
   medium: getFontSize(20),
+  medium_1: getFontSize(24),
   large: getFontSize(42),
   xxLarge: getFontSize(80),
 };

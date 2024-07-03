@@ -11,6 +11,7 @@ import {
   Text,
   View,
 } from 'react-native';
+import Animated, {SharedTransition, withTiming} from 'react-native-reanimated';
 import {
   FilterIcon,
   LikeIcon,
@@ -18,21 +19,20 @@ import {
   SearchIcon,
 } from '../../../assets/svg';
 import FlexTitle from '../../../components/FlexTitle';
+import AppTextInput from '../../../components/ui/AppTextInput';
 import {brands} from '../../../constants/data';
 import {ROUTES} from '../../../constants/enums';
 import {globalStyle, paddingSizes, textSizes} from '../../../constants/styles';
 import useCareaTheme from '../../../hooks/useCareaTheme';
 import {HomeStackParams} from '../../../types/navigation';
-import AppTextInput from '../../../components/ui/AppTextInput';
-import Animated, {SharedTransition, withSpring} from 'react-native-reanimated';
 
 const customTransition = SharedTransition.custom(values => {
   'worklet';
   return {
-    height: withSpring(values.targetHeight),
-    width: withSpring(values.targetWidth),
-    originX: withSpring(values.targetOriginX),
-    originY: withSpring(values.targetOriginY),
+    height: withTiming(values.targetHeight),
+    width: withTiming(values.targetWidth),
+    originX: withTiming(values.targetOriginX),
+    originY: withTiming(values.targetOriginY),
   };
 });
 

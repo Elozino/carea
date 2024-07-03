@@ -35,7 +35,7 @@ const BottomNavigator = () => {
   return (
     <Tab.Navigator
       initialRouteName={ROUTES.HOME}
-      backBehavior="history"
+      // backBehavior="history"
       screenOptions={{
         headerShown: false,
         tabBarShowLabel: false,

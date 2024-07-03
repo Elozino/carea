@@ -11,6 +11,7 @@
     "format": "prettier --write --cache .",
     "clean-gradlew": "cd android && ./gradlew clean && cd ..",
     "clean-run-android": "cd android && ./gradlew clean && yarn android",
+    "apk:dev": "cd android && ./gradlew assembleDebug && cd .. ",
     "find-port": "netstat -ano | findstr :8081",
     "killPID": "taskkill /F /PID",
     "prepare": "husky"
@@ -27,6 +28,7 @@
     "r3f-native-orbitcontrols": "^1.0.9",
     "react": "18.2.0",
     "react-native": "0.73.2",
+    "react-native-reanimated": "^3.12.1",
     "react-native-safe-area-context": "^4.8.2",
     "react-native-screens": "^3.29.0",
     "react-native-svg": "^15.3.0",
