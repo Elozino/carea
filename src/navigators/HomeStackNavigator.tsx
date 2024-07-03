@@ -15,7 +15,7 @@ import {HomeStackParams} from '../types/navigation';
 const Stack = createNativeStackNavigator<HomeStackParams>();
 const HomeStackNavigator = () => {
   return (
-    <Stack.Navigator screenOptions={{headerShown: false,}}>
+    <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen name={ROUTES.HOME} component={Home} />
       <Stack.Screen name={ROUTES.NOTIFICATION} component={Notification} />
       <Stack.Screen name={ROUTES.WISH_LIST} component={WishList} />
