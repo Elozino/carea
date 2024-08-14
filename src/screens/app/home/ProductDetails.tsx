@@ -16,6 +16,7 @@ import useCareaTheme from '../../../hooks/useCareaTheme';
 import useHideBottomBar from '../../../hooks/useHideBottomTab';
 import {HomeStackParams} from '../../../types/navigation';
 import {Button} from '../../../components';
+import SafeInset from '../../../components/layout/SafeInset';
 
 const customTransition = SharedTransition.custom(values => {
   'worklet';
@@ -33,7 +34,7 @@ const ProductDetails = () => {
   const {navigate, goBack} =
     useNavigation<NativeStackNavigationProp<HomeStackParams>>();
   return (
-    <View style={[globalStyle.container, {backgroundColor: theme.bg_1}]}>
+    <SafeInset>
       <Topbar
         text=""
         leftIcon={<ArrowLeftIcon fill={theme.btn_bg} />}
@@ -165,7 +166,7 @@ const ProductDetails = () => {
           </View>
         </View>
       </ScrollView>
-    </View>
+    </SafeInset>
   );
 };
 

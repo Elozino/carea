@@ -12,12 +12,17 @@ import {
   PadlockIcon,
 } from '../../assets/svg';
 import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {AuthStackParams} from '../../types/navigation';
+import {ROUTES} from '../../constants/enums';
+import SafeInset from '../../components/layout/SafeInset';
 
 const Login = () => {
   const theme = useCareaTheme();
-  const {navigate} = useNavigation();
+  const {navigate} =
+    useNavigation<NativeStackNavigationProp<AuthStackParams>>();
   return (
-    <View style={[styles.wrapper, {backgroundColor: theme.bg_1}]}>
+    <SafeInset style={styles.wrapper}>
       <View style={[styles.imageWrapper]}>
         <Image
           source={require('../../assets/images/car.png')}
@@ -35,7 +40,7 @@ const Login = () => {
         <Button
           text={'Sign in'}
           textStyle={{fontSize: textSizes.base}}
-          onPress={() => navigate('ProfileForm')}
+          onPress={() => navigate(ROUTES.PROFILE_FORM)}
         />
       </View>
       <View style={[styles.divider]}>
@@ -53,19 +58,17 @@ const Login = () => {
           style={{...styles.socialsBtn, backgroundColor: theme.btn_bg1}}
         />
         <Button
-          icon={<AppleIcon />}
+          icon={<AppleIcon fill={theme.btn_bg} />}
           style={{...styles.socialsBtn, backgroundColor: theme.btn_bg1}}
         />
       </View>
       <View style={[styles.accWrapper]}>
-        <Text style={[styles.accText, {color: theme.text_1}]}>
-          Don't have an account?{' '}
-        </Text>
-        <Pressable onPress={() => navigate('CreateAccount')}>
+        <Text style={[{color: theme.text_1}]}>Don't have an account? </Text>
+        <Pressable onPress={() => navigate(ROUTES.CREATE_ACCOUNT)}>
           <Text style={{color: theme.text_1, fontWeight: '900'}}>Sign up</Text>
         </Pressable>
       </View>
-    </View>
+    </SafeInset>
   );
 };
 

@@ -6,10 +6,14 @@ import {paddingSizes, textSizes} from '../../constants/styles';
 import useCareaTheme from '../../hooks/useCareaTheme';
 import {AppleIcon, FacebookIcon, GoogleIcon} from '../../assets/svg';
 import {useNavigation} from '@react-navigation/native';
+import {ROUTES} from '../../constants/enums';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {AuthStackParams} from '../../types/navigation';
 
 const Auth = () => {
   const theme = useCareaTheme();
-  const {navigate} = useNavigation();
+  const {navigate} =
+    useNavigation<NativeStackNavigationProp<AuthStackParams>>();
   return (
     <View style={[styles.wrapper, {backgroundColor: theme.bg_1}]}>
       <View style={[styles.authWrapper]}>
@@ -43,7 +47,7 @@ const Auth = () => {
             textStyle={{color: theme.text_1, fontSize: textSizes.base}}
           />
           <Button
-            icon={<AppleIcon />}
+            icon={<AppleIcon fill={theme.btn_bg} />}
             text={'Continue with Apple'}
             style={{
               ...styles.socials,
@@ -61,13 +65,13 @@ const Auth = () => {
         <Button
           text={'Sign in with password'}
           textStyle={{fontSize: textSizes.base}}
-          onPress={() => navigate('Login')}
+          onPress={() => navigate(ROUTES.LOGIN)}
         />
         <View style={[styles.accWrapper]}>
           <Text style={[styles.accText, {color: theme.text_1}]}>
             Don't have an account?{' '}
           </Text>
-          <Pressable onPress={() => navigate('CreateAccount')}>
+          <Pressable onPress={() => navigate(ROUTES.CREATE_ACCOUNT)}>
             <Text style={{color: theme.text_1, fontWeight: '900'}}>
               Sign up
             </Text>
@@ -110,6 +114,7 @@ const styles = StyleSheet.create({
   socials: {
     borderRadius: 10,
     borderWidth: 0.3,
+    gap: 5,
   },
   divider: {
     flexDirection: 'row',

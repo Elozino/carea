@@ -25,6 +25,7 @@ import {ROUTES} from '../../../constants/enums';
 import {globalStyle, paddingSizes, textSizes} from '../../../constants/styles';
 import useCareaTheme from '../../../hooks/useCareaTheme';
 import {HomeStackParams} from '../../../types/navigation';
+import SafeInset from '../../../components/layout/SafeInset';
 
 const customTransition = SharedTransition.custom(values => {
   'worklet';
@@ -42,7 +43,7 @@ const Home = () => {
     useNavigation<NativeStackNavigationProp<HomeStackParams>>();
   const bottomHeight = useBottomTabBarHeight();
   return (
-    <View style={[globalStyle.container, {backgroundColor: theme.bg_1}]}>
+    <SafeInset>
       <ScrollView
         style={{flex: 1}}
         showsVerticalScrollIndicator={false}
@@ -266,7 +267,7 @@ const Home = () => {
             ))}
         </ScrollView>
       </ScrollView>
-    </View>
+    </SafeInset>
   );
 };
 

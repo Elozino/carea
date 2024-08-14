@@ -1,4 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import React from 'react';
 import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
 import {
@@ -10,12 +11,15 @@ import {
 } from '../../assets/svg';
 import {AppTextInput} from '../../components';
 import {Button} from '../../components/ui/Button';
+import {ROUTES} from '../../constants/enums';
 import {getFontSize, paddingSizes} from '../../constants/styles';
 import useCareaTheme from '../../hooks/useCareaTheme';
+import {AuthStackParams} from '../../types/navigation';
 
 const CreateAccount = () => {
   const theme = useCareaTheme();
-  const {navigate} = useNavigation();
+  const {navigate} =
+    useNavigation<NativeStackNavigationProp<AuthStackParams>>();
   return (
     <View style={[styles.wrapper, {backgroundColor: theme.bg_1}]}>
       <View style={[styles.imageWrapper]}>
@@ -32,7 +36,10 @@ const CreateAccount = () => {
         <AppTextInput placeholder="Email" leftIcon={<EmailIcon />} />
         <AppTextInput placeholder="Password" leftIcon={<PadlockIcon />} />
         <View style={{marginTop: paddingSizes.small}} />
-        <Button text={'Sign up'} onPress={() => navigate('ProfileForm')} />
+        <Button
+          text={'Sign up'}
+          onPress={() => navigate(ROUTES.PROFILE_FORM)}
+        />
       </View>
       <View style={[styles.divider]}>
         <View style={[styles.lineRule, {backgroundColor: theme.text_1}]} />
@@ -49,15 +56,13 @@ const CreateAccount = () => {
           style={{...styles.socialsBtn, backgroundColor: theme.btn_bg1}}
         />
         <Button
-          icon={<AppleIcon />}
+          icon={<AppleIcon fill={theme.btn_bg} />}
           style={{...styles.socialsBtn, backgroundColor: theme.btn_bg1}}
         />
       </View>
       <View style={[styles.accWrapper]}>
-        <Text style={[styles.accText, {color: theme.text_1}]}>
-          Don't have an account?{' '}
-        </Text>
-        <Pressable onPress={() => navigate('Login')}>
+        <Text style={[{color: theme.text_1}]}>Do have an account? </Text>
+        <Pressable onPress={() => navigate(ROUTES.LOGIN)}>
           <Text style={{color: theme.text_1, fontWeight: '900'}}>Sign in</Text>
         </Pressable>
       </View>

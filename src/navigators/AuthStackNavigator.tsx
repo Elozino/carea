@@ -8,6 +8,8 @@ import {
   ProfileForm,
   Welcome,
 } from '../screens';
+import BottomNavigator from './BottomNavigator';
+import {ROUTES} from '../constants/enums';
 
 const Stack = createNativeStackNavigator();
 
@@ -17,12 +19,13 @@ const AuthStackNavigator = () => {
       screenOptions={{
         headerShown: false,
       }}>
-      <Stack.Screen name="GetStarted" component={GetStarted} />
-      <Stack.Screen name="Auth" component={Auth} />
-      <Stack.Screen name="Login" component={Login} />
-      <Stack.Screen name="CreateAccount" component={CreateAccount} />
-      <Stack.Screen name="Welcome" component={Welcome} />
-      <Stack.Screen name="ProfileForm" component={ProfileForm} />
+      <Stack.Screen name={ROUTES.WELCOME} component={Welcome} />
+      <Stack.Screen name={ROUTES.GET_STARTED} component={GetStarted} />
+      <Stack.Screen name={ROUTES.AUTH} component={Auth} />
+      <Stack.Screen name={ROUTES.LOGIN} component={Login} />
+      <Stack.Screen name={ROUTES.CREATE_ACCOUNT} component={CreateAccount} />
+      <Stack.Screen name={ROUTES.PROFILE_FORM} component={ProfileForm} />
+      <Stack.Screen name={ROUTES.APP} component={BottomNavigator} />
     </Stack.Navigator>
   );
 };

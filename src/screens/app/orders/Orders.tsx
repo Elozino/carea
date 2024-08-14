@@ -1,14 +1,14 @@
-import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {globalStyle} from '../../../constants/styles';
+import {StyleSheet, Text} from 'react-native';
+import SafeInset from '../../../components/layout/SafeInset';
 import useCareaTheme from '../../../hooks/useCareaTheme';
 
 const Orders = () => {
   const theme = useCareaTheme();
   return (
-    <View style={[globalStyle.container, {backgroundColor: theme.bg_1}]}>
+    <SafeInset>
       <Text>Orders</Text>
-    </View>
+    </SafeInset>
   );
 };
 

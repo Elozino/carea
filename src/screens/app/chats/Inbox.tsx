@@ -1,14 +1,14 @@
-import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import { StyleSheet, Text } from 'react-native';
+import SafeInset from '../../../components/layout/SafeInset';
 import useCareaTheme from '../../../hooks/useCareaTheme';
-import {globalStyle} from '../../../constants/styles';
 
 const Inbox = () => {
   const theme = useCareaTheme();
   return (
-    <View style={[globalStyle.container, {backgroundColor: theme.bg_1}]}>
+    <SafeInset>
       <Text>Inbox</Text>
-    </View>
+    </SafeInset>
   );
 };
 

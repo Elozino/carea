@@ -11,19 +11,20 @@ import {
   View,
 } from 'react-native';
 import {ArrowLeftIcon, LikeIcon} from '../../../assets/svg';
+import SafeInset from '../../../components/layout/SafeInset';
 import Topbar from '../../../components/Topbar';
-import {globalStyle, paddingSizes, textSizes} from '../../../constants/styles';
+import {brands} from '../../../constants/data';
+import {paddingSizes, textSizes} from '../../../constants/styles';
 import useCareaTheme from '../../../hooks/useCareaTheme';
 import useHideBottomBar from '../../../hooks/useHideBottomTab';
 import {HomeStackParams} from '../../../types/navigation';
-import {brands} from '../../../constants/data';
 
 const TopDeals = () => {
   useHideBottomBar();
   const theme = useCareaTheme();
   const {goBack} = useNavigation<NativeStackNavigationProp<HomeStackParams>>();
   return (
-    <View style={[globalStyle.container, {backgroundColor: theme.bg_1}]}>
+    <SafeInset>
       <Topbar
         text={'Top Deals'}
         leftIcon={<ArrowLeftIcon fill={theme.btn_bg} />}
@@ -63,6 +64,7 @@ const TopDeals = () => {
           gap: 10,
           marginTop: Number(paddingSizes.medium) / 2,
           paddingHorizontal: paddingSizes.medium,
+          paddingBottom: paddingSizes.xLarge,
         }}>
         {Array(10)
           .fill(0)
@@ -145,7 +147,7 @@ const TopDeals = () => {
             </View>
           ))}
       </ScrollView>
-    </View>
+    </SafeInset>
   );
 };
 

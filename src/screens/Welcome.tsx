@@ -2,12 +2,16 @@ import React, {useEffect} from 'react';
 import {ImageBackground, StatusBar, StyleSheet, Text, View} from 'react-native';
 import {paddingSizes, textSizes} from '../constants/styles';
 import {useNavigation} from '@react-navigation/native';
+import {ROUTES} from '../constants/enums';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {AuthStackParams} from '../types/navigation';
 
 const Welcome = () => {
-  const {navigate} = useNavigation();
+  const {navigate} =
+    useNavigation<NativeStackNavigationProp<AuthStackParams>>();
   useEffect(() => {
     const timeout = setTimeout(() => {
-      navigate('');
+      navigate(ROUTES.GET_STARTED);
     }, 2000);
 
     return () => {

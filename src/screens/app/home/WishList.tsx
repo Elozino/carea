@@ -1,10 +1,11 @@
 /* eslint-disable react-native/no-inline-styles */
-import {Image, ScrollView, Text, View} from 'react-native';
-import React from 'react';
-import Topbar from '../../../components/Topbar';
-import {ArrowLeftIcon, LikeIcon} from '../../../assets/svg';
-import {globalStyle, paddingSizes, textSizes} from '../../../constants/styles';
 import {useNavigation} from '@react-navigation/native';
+import React from 'react';
+import {Image, ScrollView, Text, View} from 'react-native';
+import {ArrowLeftIcon, LikeIcon} from '../../../assets/svg';
+import SafeInset from '../../../components/layout/SafeInset';
+import Topbar from '../../../components/Topbar';
+import {paddingSizes, textSizes} from '../../../constants/styles';
 import useCareaTheme from '../../../hooks/useCareaTheme';
 import useHideBottomBar from '../../../hooks/useHideBottomTab';
 
@@ -13,7 +14,7 @@ const WishList = () => {
   const {goBack} = useNavigation();
   useHideBottomBar();
   return (
-    <View style={[globalStyle.container, {backgroundColor: theme.bg_1}]}>
+    <SafeInset>
       <Topbar
         text={'My Wishlist'}
         leftIcon={<ArrowLeftIcon fill={theme.btn_bg} />}
@@ -120,7 +121,7 @@ const WishList = () => {
             </View>
           ))}
       </ScrollView>
-    </View>
+    </SafeInset>
   );
 };
 

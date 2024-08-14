@@ -1,15 +1,19 @@
 /* eslint-disable react-native/no-inline-styles */
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import React, {useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Button} from '../components/ui/Button';
+import {ROUTES} from '../constants/enums';
 import {getFontSize, globalStyle, paddingSizes} from '../constants/styles';
 import useCareaTheme from '../hooks/useCareaTheme';
-import {useNavigation} from '@react-navigation/native';
+import {AuthStackParams} from '../types/navigation';
 
 const GetStarted = () => {
   const theme = useCareaTheme();
-  const [activeIndex, setActiveIndex] = useState < number > 0;
-  const {navigate} = useNavigation();
+  const [activeIndex, setActiveIndex] = useState<number>(0);
+  const {navigate} =
+    useNavigation<NativeStackNavigationProp<AuthStackParams>>();
 
   return (
     <View style={[{backgroundColor: theme.bg_1}, globalStyle.container]}>
@@ -39,7 +43,7 @@ const GetStarted = () => {
           onPress={() =>
             activeIndex <= 1
               ? setActiveIndex(prev => prev + 1)
-              : navigate('Auth')
+              : navigate(ROUTES.AUTH)
           }
         />
       </View>

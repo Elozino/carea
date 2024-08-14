@@ -41,7 +41,7 @@ const AppTextInput = ({
       {leftIcon}
       <TextInput
         placeholder={placeholder}
-        placeholderTextColor={theme.text_3}
+        placeholderTextColor={theme.gray}
         value={value}
         onChangeText={onChangeText}
         secureTextEntry={secureTextEntry}

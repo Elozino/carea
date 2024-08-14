@@ -1,10 +1,11 @@
 import {useNavigation} from '@react-navigation/native';
 import React from 'react';
-import {FlatList, StyleSheet, View} from 'react-native';
+import {FlatList, StyleSheet} from 'react-native';
 import {ArrowLeftIcon} from '../../../assets/svg';
 import Topbar from '../../../components/Topbar';
 import NotificationCard from '../../../components/cards/NotificationCard';
-import {globalStyle, paddingSizes} from '../../../constants/styles';
+import SafeInset from '../../../components/layout/SafeInset';
+import {paddingSizes} from '../../../constants/styles';
 import useCareaTheme from '../../../hooks/useCareaTheme';
 import useHideBottomBar from '../../../hooks/useHideBottomTab';
 
@@ -13,7 +14,7 @@ const Notification = () => {
   const {goBack} = useNavigation();
   useHideBottomBar();
   return (
-    <View style={[globalStyle.container, {backgroundColor: theme.bg_1}]}>
+    <SafeInset>
       <Topbar
         text={'Notification'}
         leftIcon={<ArrowLeftIcon fill={theme.btn_bg} />}
@@ -25,7 +26,7 @@ const Notification = () => {
         renderItem={() => <NotificationCard />}
         contentContainerStyle={[styles.cardContainer]}
       />
-    </View>
+    </SafeInset>
   );
 };
 
