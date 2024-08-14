@@ -2,7 +2,7 @@
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import React, {useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Appearance, StatusBar, StyleSheet, Text, View} from 'react-native';
 import {Button} from '../components/ui/Button';
 import {ROUTES} from '../constants/enums';
 import {getFontSize, globalStyle, paddingSizes} from '../constants/styles';
@@ -17,6 +17,14 @@ const GetStarted = () => {
 
   return (
     <View style={[{backgroundColor: theme.bg_1}, globalStyle.container]}>
+      <StatusBar
+        barStyle={
+          Appearance.getColorScheme() === 'light'
+            ? 'dark-content'
+            : 'light-content'
+        }
+        backgroundColor={theme.bg_1}
+      />
       <View style={[styles.showcase]} />
       <View style={[styles.getStarted]}>
         <Text style={[styles.getStartedText, {color: theme.text_1}]}>
