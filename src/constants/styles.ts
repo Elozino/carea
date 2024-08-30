@@ -42,6 +42,11 @@ export const globalStyle = StyleSheet.create({
   container: {
     flex: 1,
   },
+  center: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   title: {
     textAlign: 'center',
     fontSize: textSizes.large,

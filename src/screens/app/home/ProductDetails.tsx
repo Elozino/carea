@@ -2,7 +2,13 @@
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import React from 'react';
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import Animated, {SharedTransition, withTiming} from 'react-native-reanimated';
 import {
   ArrowLeftIcon,
@@ -10,13 +16,14 @@ import {
   LikeIcon,
   TelephoneIcon,
 } from '../../../assets/svg';
+import {Button} from '../../../components';
+import SafeInset from '../../../components/layout/SafeInset';
 import Topbar from '../../../components/Topbar';
-import {globalStyle, paddingSizes, textSizes} from '../../../constants/styles';
+import {ROUTES} from '../../../constants/enums';
+import {paddingSizes, textSizes} from '../../../constants/styles';
 import useCareaTheme from '../../../hooks/useCareaTheme';
 import useHideBottomBar from '../../../hooks/useHideBottomTab';
 import {HomeStackParams} from '../../../types/navigation';
-import {Button} from '../../../components';
-import SafeInset from '../../../components/layout/SafeInset';
 
 const customTransition = SharedTransition.custom(values => {
   'worklet';
@@ -144,7 +151,9 @@ const ProductDetails = () => {
               <Text style={{color: theme.btn_bg}}>Official Account of BMW</Text>
             </View>
             <View style={{flexDirection: 'row', gap: 20}}>
-              <ChatIcon fill={theme.btn_bg} width={30} height={30} />
+              <TouchableOpacity onPress={() => navigate(ROUTES.CHAT)}>
+                <ChatIcon fill={theme.btn_bg} width={30} height={30} />
+              </TouchableOpacity>
               <TelephoneIcon fill={theme.btn_bg} width={30} height={25} />
             </View>
           </View>

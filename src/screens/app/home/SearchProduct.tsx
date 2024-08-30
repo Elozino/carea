@@ -1,11 +1,12 @@
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import React from 'react';
-import {StyleSheet, Text} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {FilterIcon, SearchIcon} from '../../../assets/svg';
 import {AppTextInput} from '../../../components';
 import FlexTitle from '../../../components/FlexTitle';
 import SafeInset from '../../../components/layout/SafeInset';
+import ProductListing from '../../../components/ProductListing';
 import {ROUTES} from '../../../constants/enums';
 import {paddingSizes} from '../../../constants/styles';
 import useCareaTheme from '../../../hooks/useCareaTheme';
@@ -32,11 +33,22 @@ const SearchProduct = () => {
         onPress={() => navigate(ROUTES.SEARCH_PRODUCT)}
       />
       <FlexTitle title="Recent" btnTitle="Clear All" onPress={undefined} />
-      <Text>SearchProduct</Text>
+      {/* <View style={[styles.hairline, {borderColor: theme?.gray}]} /> */}
+      {/* <FlatList
+        keyExtractor={(_, index) => index.toString()}
+        data={Array.from({length: 12})}
+        renderItem={({item}) => (
+          <FlexTitle
+            title="Toyota"
+            btnTitle={<XIcon fill={theme?.btn_bg} width={16} height={16} />}
+            onPress={undefined}
+          />
+        )}
+      /> */}
+      {/* <NotFound /> */}
+      <ProductListing />
     </SafeInset>
   );
 };
 
 export default SearchProduct;
-
-const styles = StyleSheet.create({});

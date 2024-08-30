@@ -16,6 +16,7 @@ export type HomeStackParams = {
   SPECIAL_OFFER: undefined;
   TOP_DEALS: undefined;
   PRODUCT_DETAILS: undefined;
+  CHAT: undefined;
 };
 
 export type RootStackParams = {

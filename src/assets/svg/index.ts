@@ -16,6 +16,10 @@ import LikeIcon from './LikeIcon';
 import FilterIcon from './FilterIcon';
 import SearchIcon from './SearchIcon';
 import TelephoneIcon from './TelephoneIcon';
+import XIcon from './XIcon';
+import RecordStackIcon from './RecordStackIcon';
+import GalleryIcon from './GalleryIcon';
+import MicIcon from './MicIcon';
 
 export {
   GoogleIcon,
@@ -36,4 +40,8 @@ export {
   FilterIcon,
   SearchIcon,
   TelephoneIcon,
+  XIcon,
+  RecordStackIcon,
+  GalleryIcon,
+  MicIcon,
 };

@@ -2,6 +2,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
 import {ROUTES} from '../constants/enums';
 import {
+  Chat,
   Home,
   Notification,
   ProductDetails,
@@ -22,6 +23,7 @@ const HomeStackNavigator = () => {
       <Stack.Screen name={ROUTES.TOP_DEALS} component={TopDeals} />
       <Stack.Screen name={ROUTES.SPECIAL_OFFER} component={SpecialOffer} />
       <Stack.Screen name={ROUTES.PRODUCT_DETAILS} component={ProductDetails} />
+      <Stack.Screen name={ROUTES.CHAT} component={Chat} />
       <Stack.Group
         screenOptions={{
           presentation: 'transparentModal',

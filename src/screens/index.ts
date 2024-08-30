@@ -15,6 +15,7 @@ import Inbox from './app/chats/Inbox';
 import Profile from './app/profile/Profile';
 import Wallet from './app/wallet/Wallet';
 import Orders from './app/orders/Orders';
+import Chat from './app/chats/Chat';
 
 export {
   Welcome,
@@ -34,4 +35,5 @@ export {
   Profile,
   Wallet,
   Orders,
+  Chat,
 };

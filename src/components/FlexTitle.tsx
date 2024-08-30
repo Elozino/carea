@@ -3,13 +3,25 @@ import React from 'react';
 import {paddingSizes, textSizes} from '../constants/styles';
 import useCareaTheme from '../hooks/useCareaTheme';
 
-const FlexTitle = ({title, btnTitle, onPress}) => {
+interface IFlexTitle {
+  title: string;
+  btnTitle: string | React.ReactNode;
+  onPress: () => void;
+}
+
+const FlexTitle = ({title, btnTitle, onPress, icon}: IFlexTitle) => {
   const theme = useCareaTheme();
   return (
     <View style={styles.wrapper}>
       <Text style={[styles.title, {color: theme.text_1}]}>{title}</Text>
       <Pressable onPress={onPress} style={[styles.btnWrapper]}>
-        <Text style={[styles.btnTitle, {color: theme.text_1}]}>{btnTitle}</Text>
+        {typeof btnTitle !== 'string' ? (
+          btnTitle
+        ) : (
+          <Text style={[styles.btnTitle, {color: theme.text_1}]}>
+            {btnTitle}
+          </Text>
+        )}
       </Pressable>
     </View>
   );
