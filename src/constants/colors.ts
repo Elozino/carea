@@ -25,7 +25,7 @@ export const COLORS = {
     text_3: '#cecece',
     btn_bg: '#fff',
     btn_text: '#000',
-    btn_bg1: '#33333340',
+    btn_bg1: '#333333',
     black: '#000200',
     gray: 'gray',
   },

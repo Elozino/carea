@@ -29,6 +29,9 @@ export type BottomStackParams = {};
 
 export type ProfileStackParams = {};
 
-export type OrderStackParams = {};
+export type OrderStackParams = {
+  ORDERS: undefined;
+  TRACK_ORDER: undefined;
+};
 
 export type WalletStackParams = {};
