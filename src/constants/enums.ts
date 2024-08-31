@@ -19,4 +19,5 @@ export enum ROUTES {
   PRODUCT_DETAILS = 'PRODUCT_DETAILS',
   INBOX = 'INBOX',
   CHAT = 'CHAT',
+  CALL = 'CALL',
 }

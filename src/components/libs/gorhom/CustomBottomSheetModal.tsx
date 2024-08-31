@@ -4,8 +4,12 @@ import BottomSheet, {
 } from '@gorhom/bottom-sheet';
 import React, {useMemo, forwardRef} from 'react';
 import {StyleSheet} from 'react-native';
-import {getFontSize, globalStyle, paddingSizes} from '../../constants/styles';
-import useCareaTheme from '../../hooks/useCareaTheme';
+import {
+  getFontSize,
+  globalStyle,
+  paddingSizes,
+} from '../../../constants/styles';
+import useCareaTheme from '../../../hooks/useCareaTheme';
 import CustomBackdrop from './CustomBackDrop';
 
 interface CustomBottomSheetModalProps {

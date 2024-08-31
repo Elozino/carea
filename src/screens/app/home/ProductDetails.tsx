@@ -155,7 +155,9 @@ const ProductDetails = () => {
               <TouchableOpacity onPress={() => navigate(ROUTES.CHAT)}>
                 <ChatIcon fill={theme.btn_bg} width={30} height={30} />
               </TouchableOpacity>
-              <TelephoneIcon fill={theme.btn_bg} width={30} height={25} />
+              <TouchableOpacity onPress={() => navigate(ROUTES.CALL)}>
+                <TelephoneIcon fill={theme.btn_bg} width={30} height={25} />
+              </TouchableOpacity>
             </View>
           </View>
           <View style={{flexDirection: 'row'}}>

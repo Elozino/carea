@@ -17,6 +17,7 @@ import Wallet from './app/wallet/Wallet';
 import Orders from './app/orders/Orders';
 import Chat from './app/chats/Chat';
 import TrackOrder from './app/orders/TrackOrder';
+import Call from './app/common/Call';
 
 export {
   Welcome,
@@ -38,4 +39,5 @@ export {
   Orders,
   Chat,
   TrackOrder,
+  Call,
 };

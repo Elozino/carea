@@ -17,6 +17,7 @@ export type HomeStackParams = {
   TOP_DEALS: undefined;
   PRODUCT_DETAILS: undefined;
   CHAT: undefined;
+  CALL: undefined;
 };
 
 export type RootStackParams = {
@@ -35,3 +36,7 @@ export type OrderStackParams = {
 };
 
 export type WalletStackParams = {};
+export type InboxStackParams = {
+  CHAT: undefined;
+  CALL: undefined;
+};
