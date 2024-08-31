@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, Text, View, Platform} from 'react-native';
 import React from 'react';
 import Topbar from '../../../components/Topbar';
 import {ArrowLeftIcon} from '../../../assets/svg';
@@ -15,6 +15,7 @@ import CheckFillIcon from '../../../assets/svg/CheckFillIcon';
 import BoxOpenedIcon from '../../../assets/svg/BoxOpenedIcon';
 import DeliveryGuyIcon from '../../../assets/svg/DeliveryGuyIcon';
 import DeliveryIcon from '../../../assets/svg/DeliveryIcon';
+import OrderDetail from '../../../components/OrderDetail';
 
 const TrackOrder = () => {
   const theme = useCareaTheme();
@@ -26,7 +27,10 @@ const TrackOrder = () => {
         leftIcon={<ArrowLeftIcon fill={theme.btn_bg} />}
         leftIconAction={goBack}
       />
-      <ScrollView contentContainerStyle={styles.containerStyle}>
+      <ScrollView
+        style={{flexGrow: 1}}
+        contentContainerStyle={styles.containerStyle}
+        showsVerticalScrollIndicator={false}>
         <OrderCard badge={false} orderBtn={false} />
         <View style={styles.containerStyleWrapper}>
           <View style={styles.iconContainer}>
@@ -62,6 +66,24 @@ const TrackOrder = () => {
             borderBottomColor: theme.gray,
           }}
         />
+        <View>
+          <Text
+            style={{
+              color: theme.btn_bg,
+              fontSize: textSizes.medium,
+              marginVertical: paddingSizes.medium,
+              fontWeight: '500',
+            }}>
+            Order Status Details
+          </Text>
+          <View style={{gap: getFontSize(20)}}>
+            {Array(10)
+              .fill(0)
+              .map(() => (
+                <OrderDetail />
+              ))}
+          </View>
+        </View>
       </ScrollView>
     </SafeInset>
   );
@@ -71,8 +93,9 @@ export default TrackOrder;
 
 const styles = StyleSheet.create({
   containerStyle: {
-    flex: 1,
+    flexGrow: 1,
     padding: paddingSizes.medium,
+    paddingBottom: Platform.OS === 'ios' ? 70 : 100,
   },
   containerStyleWrapper: {
     flexDirection: 'row',
