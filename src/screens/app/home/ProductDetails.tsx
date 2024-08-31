@@ -24,6 +24,7 @@ import {paddingSizes, textSizes} from '../../../constants/styles';
 import useCareaTheme from '../../../hooks/useCareaTheme';
 import useHideBottomBar from '../../../hooks/useHideBottomTab';
 import {HomeStackParams} from '../../../types/navigation';
+import StarIcon from '../../../assets/svg/StarIcon';
 
 const customTransition = SharedTransition.custom(values => {
   'worklet';
@@ -113,7 +114,7 @@ const ProductDetails = () => {
                 New
               </Text>
             </View>
-            <Text>Star</Text>
+            <StarIcon width={15} height={15} />
             <Text>4.5</Text>
             <Text>(86 reviews)</Text>
           </View>
