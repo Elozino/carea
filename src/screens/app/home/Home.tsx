@@ -26,6 +26,7 @@ import {paddingSizes, textSizes} from '../../../constants/styles';
 import useCareaTheme from '../../../hooks/useCareaTheme';
 import {HomeStackParams} from '../../../types/navigation';
 import SafeInset from '../../../components/layout/SafeInset';
+import SpecialOfferCard from '../../../components/SpecialOfferCard';
 
 const customTransition = SharedTransition.custom(values => {
   'worklet';
@@ -105,42 +106,7 @@ const Home = () => {
           btnTitle="See All"
           onPress={() => navigate(ROUTES.SPECIAL_OFFER)}
         />
-        <View
-          style={[styles.specialOfferWrapper, {backgroundColor: theme.bg_2}]}>
-          <View style={{flex: 0.5, gap: 10}}>
-            <Text
-              style={[
-                {
-                  color: theme.black,
-                  fontSize: textSizes.large,
-                  fontWeight: '700',
-                },
-              ]}>
-              20%
-            </Text>
-            <Text
-              style={[
-                {
-                  color: theme.black,
-                  fontSize: textSizes.medium,
-                  fontWeight: '700',
-                },
-              ]}>
-              Week Deals
-            </Text>
-            <Text style={[{color: theme.black, fontSize: textSizes.base}]}>
-              Get a new car discount only valid this week
-            </Text>
-          </View>
-          <View style={styles.specialOfferImgWarapper}>
-            <Image
-              source={require('../../../assets/images/car.png')}
-              resizeMode="cover"
-              style={styles.specialOfferImg}
-            />
-          </View>
-        </View>
-
+        <SpecialOfferCard />
         {/* top deals */}
         <FlexTitle
           title="Top Deals"
@@ -297,26 +263,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-start',
     gap: 10,
-  },
-  specialOfferWrapper: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    borderRadius: 20,
-    padding: paddingSizes.medium,
-    position: 'relative',
-    height: 200,
-    marginHorizontal: paddingSizes.medium,
-  },
-  specialOfferImgWarapper: {
-    flex: 0.5,
-    position: 'absolute',
-    top: 50,
-    right: 0,
-  },
-  specialOfferImg: {
-    width: 220,
-    height: 100,
   },
   topDealsScroll: {},
 });
