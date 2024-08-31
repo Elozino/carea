@@ -1,6 +1,7 @@
 import {Pressable, StyleSheet, Text, ViewStyle} from 'react-native';
 import {paddingSizes, textSizes} from '../../constants/styles';
 import React from 'react';
+import useCareaTheme from '../../hooks/useCareaTheme';
 
 const NavTopTab = ({
   title,
@@ -11,9 +12,10 @@ const NavTopTab = ({
   onPress: () => void;
   style?: ViewStyle;
 }) => {
+  const theme = useCareaTheme();
   return (
     <Pressable onPress={onPress} style={[styles.navTopTab, style]}>
-      <Text style={styles.NavTopTabText}>{title}</Text>
+      <Text style={[styles.NavTopTabText, {color: theme.btn_bg}]}>{title}</Text>
     </Pressable>
   );
 };

@@ -22,7 +22,7 @@ import FlexTitle from '../../../components/FlexTitle';
 import AppTextInput from '../../../components/ui/AppTextInput';
 import {brands} from '../../../constants/data';
 import {ROUTES} from '../../../constants/enums';
-import {globalStyle, paddingSizes, textSizes} from '../../../constants/styles';
+import {paddingSizes, textSizes} from '../../../constants/styles';
 import useCareaTheme from '../../../hooks/useCareaTheme';
 import {HomeStackParams} from '../../../types/navigation';
 import SafeInset from '../../../components/layout/SafeInset';

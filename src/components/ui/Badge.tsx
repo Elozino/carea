@@ -11,7 +11,7 @@ const Badge = ({text}: {text: string}) => {
         styles.wrapper,
         {backgroundColor: theme.gray, borderRadius: getFontSize(5)},
       ]}>
-      <Text style={{color: theme?.btn_bg1, ...styles.text}}>{text}</Text>
+      <Text style={{color: theme?.white, ...styles.text}}>{text}</Text>
     </Pressable>
   );
 };

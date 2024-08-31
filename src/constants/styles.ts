@@ -56,6 +56,11 @@ export const globalStyle = StyleSheet.create({
   formWrapper: {
     gap: 12,
   },
+  navTopTabContainer: {
+    flexDirection: 'row',
+    marginBottom: paddingSizes.medium,
+    paddingHorizontal: paddingSizes.medium,
+  },
 });
 
 export const {width: WINDOW_WIDTH, height: WINDOW_HEIGHT} =

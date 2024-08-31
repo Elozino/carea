@@ -4,6 +4,8 @@ import {Appearance, StatusBar} from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import RootStackNavigator from './src/navigators/RootStackNavigator';
 import useCareaTheme from './src/hooks/useCareaTheme';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import {globalStyle} from './src/constants/styles';
 
 const App = () => {
   const theme = useCareaTheme();
@@ -16,19 +18,21 @@ const App = () => {
   };
   return (
     <>
-      <SafeAreaProvider>
-        <StatusBar
-          barStyle={
-            Appearance.getColorScheme() === 'light'
-              ? 'dark-content'
-              : 'light-content'
-          }
-          backgroundColor={theme.bg_1}
-        />
-        <NavigationContainer theme={MyTheme}>
-          <RootStackNavigator />
-        </NavigationContainer>
-      </SafeAreaProvider>
+      <GestureHandlerRootView style={globalStyle.container}>
+        <SafeAreaProvider>
+          <StatusBar
+            barStyle={
+              Appearance.getColorScheme() === 'light'
+                ? 'dark-content'
+                : 'light-content'
+            }
+            backgroundColor={theme.bg_1}
+          />
+          <NavigationContainer theme={MyTheme}>
+            <RootStackNavigator />
+          </NavigationContainer>
+        </SafeAreaProvider>
+      </GestureHandlerRootView>
     </>
   );
 };

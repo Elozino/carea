@@ -19,10 +19,12 @@ const OrderCard = ({
   badge = true,
   orderBtn = true,
   isCompleted,
+  openModal,
 }: {
   badge?: boolean;
   orderBtn?: boolean;
   isCompleted?: boolean;
+  openModal?: () => void;
 }) => {
   const {navigate} =
     useNavigation<NativeStackNavigationProp<OrderStackParams>>();
@@ -80,8 +82,12 @@ const OrderCard = ({
                 backgroundColor: theme.gray,
                 ...globalStyle.center,
               }}
-              textStyle={{fontSize: getFontSize(12)}}
-              onPress={() => navigate(ROUTES.TRACK_ORDER)}
+              textStyle={{fontSize: getFontSize(12), color: theme?.white}}
+              onPress={() =>
+                isCompleted
+                  ? openModal && openModal()
+                  : navigate(ROUTES.TRACK_ORDER)
+              }
             />
           )}
         </View>

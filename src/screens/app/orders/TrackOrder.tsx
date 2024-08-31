@@ -77,10 +77,10 @@ const TrackOrder = () => {
             Order Status Details
           </Text>
           <View style={{gap: getFontSize(20)}}>
-            {Array(10)
+            {Array(5)
               .fill(0)
-              .map(() => (
-                <OrderDetail />
+              .map((_, i) => (
+                <OrderDetail key={i} />
               ))}
           </View>
         </View>

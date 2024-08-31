@@ -15,6 +15,7 @@ export const COLORS = {
     btn_bg1: '#eee',
     black: '#000200',
     gray: 'gray',
+    white: '#FFF',
   },
   dark: {
     bg_1: '#000200',
@@ -28,6 +29,7 @@ export const COLORS = {
     btn_bg1: '#333333',
     black: '#000200',
     gray: 'gray',
+    white: '#FFF',
   },
 };
 

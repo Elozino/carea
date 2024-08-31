@@ -2,7 +2,7 @@
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {KeyboardAvoidingView, ScrollView, StyleSheet, View} from 'react-native';
 import {
   ArrowLeftIcon,
   AvatarIcon,
@@ -30,34 +30,36 @@ const ProfileForm = () => {
         text="Profile"
         leftIcon={<ArrowLeftIcon fill={theme?.btn_bg} width={40} />}
       />
-      <View
-        style={[
-          globalStyle.container,
-          styles.wrapper,
-          {backgroundColor: theme.bg_1},
-        ]}>
-        <View style={styles.avatarWrapper}>
-          <View style={{position: 'relative'}}>
-            <AvatarIcon width={200} height={200} fill={theme?.btn_bg} />
-            <View style={{position: 'absolute', right: 25, bottom: 30}}>
-              <EditIcon width={30} height={30} />
+      <ScrollView>
+        <KeyboardAvoidingView
+          style={[
+            globalStyle.container,
+            styles.wrapper,
+            {backgroundColor: theme.bg_1},
+          ]}>
+          <View style={styles.avatarWrapper}>
+            <View style={{position: 'relative'}}>
+              <AvatarIcon width={200} height={200} fill={theme?.btn_bg} />
+              <View style={{position: 'absolute', right: 25, bottom: 30}}>
+                <EditIcon width={30} height={30} />
+              </View>
             </View>
           </View>
-        </View>
-        <View style={[globalStyle.formWrapper]}>
-          <AppTextInput placeholder="Full Name" />
-          <AppTextInput placeholder="Nickname" />
-          <AppTextInput
-            placeholder="Date of Birth"
-            rightIcon={<CalendarIcon />}
-          />
-          <AppTextInput placeholder="Email" rightIcon={<EmailIcon />} />
-          <AppTextInput placeholder="Phone Number" />
-          <AppTextInput placeholder="Gender" />
-        </View>
-        <View style={{marginTop: Number(paddingSizes.medium) * 2}} />
-        <Button text="Continue" onPress={() => navigate(ROUTES.APP)} />
-      </View>
+          <View style={[globalStyle.formWrapper]}>
+            <AppTextInput placeholder="Full Name" />
+            <AppTextInput placeholder="Nickname" />
+            <AppTextInput
+              placeholder="Date of Birth"
+              rightIcon={<CalendarIcon />}
+            />
+            <AppTextInput placeholder="Email" rightIcon={<EmailIcon />} />
+            <AppTextInput placeholder="Phone Number" />
+            <AppTextInput placeholder="Gender" />
+          </View>
+          <View style={{marginTop: Number(paddingSizes.medium) * 2}} />
+          <Button text="Continue" onPress={() => navigate(ROUTES.APP)} />
+        </KeyboardAvoidingView>
+      </ScrollView>
     </SafeInset>
   );
 };
