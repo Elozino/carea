@@ -20,10 +20,12 @@ const OrderCard = ({
   orderBtn = true,
   isCompleted,
   openModal,
+  isActive = true,
 }: {
   badge?: boolean;
   orderBtn?: boolean;
   isCompleted?: boolean;
+  isActive?: boolean;
   openModal?: () => void;
 }) => {
   const {navigate} =
@@ -84,7 +86,9 @@ const OrderCard = ({
               }}
               textStyle={{fontSize: getFontSize(12), color: theme?.white}}
               onPress={() =>
-                isCompleted
+                !isActive
+                  ? null
+                  : isCompleted
                   ? openModal && openModal()
                   : navigate(ROUTES.TRACK_ORDER)
               }

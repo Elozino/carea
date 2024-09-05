@@ -3,21 +3,9 @@ import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import React from 'react';
-import {
-  Image,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import {Pressable, ScrollView, Text, View} from 'react-native';
 import Animated, {SharedTransition, withTiming} from 'react-native-reanimated';
-import {
-  FilterIcon,
-  LikeIcon,
-  NotificationIcon,
-  SearchIcon,
-} from '../../../assets/svg';
+import {FilterIcon, LikeIcon, SearchIcon} from '../../../assets/svg';
 import FlexTitle from '../../../components/FlexTitle';
 import AppTextInput from '../../../components/ui/AppTextInput';
 import {brands} from '../../../constants/data';
@@ -27,6 +15,7 @@ import useCareaTheme from '../../../hooks/useCareaTheme';
 import {HomeStackParams} from '../../../types/navigation';
 import SafeInset from '../../../components/layout/SafeInset';
 import SpecialOfferCard from '../../../components/SpecialOfferCard';
+import HomeHeader from '../../../components/HomeHeader';
 
 const customTransition = SharedTransition.custom(values => {
   'worklet';
@@ -51,39 +40,10 @@ const Home = () => {
         contentContainerStyle={{
           paddingBottom: bottomHeight + Number(paddingSizes.medium),
         }}>
-        <View style={[styles.headerWrapper, styles.wrapper]}>
-          <View style={styles.profileWrapper}>
-            <Image
-              source={{
-                uri: 'https://avatars.githubusercontent.com/u/66180398?v=4',
-              }}
-              style={styles.profileImg}
-              resizeMode="cover"
-            />
-            <View>
-              <Text style={[{color: theme.text_1}]}>Good Morning 👋</Text>
-              <Text
-                style={[
-                  {
-                    color: theme.text_1,
-                    fontWeight: '800',
-                    fontSize: textSizes.medium,
-                    letterSpacing: 0.6,
-                  },
-                ]}>
-                Elozino Ovedhe
-              </Text>
-            </View>
-          </View>
-          <View style={styles.headerIcons}>
-            <Pressable onPress={() => navigate(ROUTES.NOTIFICATION)}>
-              <NotificationIcon width={30} height={30} fill={theme.btn_bg} />
-            </Pressable>
-            <Pressable onPress={() => navigate(ROUTES.WISH_LIST)}>
-              <LikeIcon width={30} height={25} fill={theme.btn_bg} />
-            </Pressable>
-          </View>
-        </View>
+        <HomeHeader
+          notificationAction={() => navigate(ROUTES.NOTIFICATION)}
+          likeAction={() => navigate(ROUTES.WISH_LIST)}
+        />
 
         <View>
           <AppTextInput
@@ -238,31 +198,3 @@ const Home = () => {
 };
 
 export default Home;
-
-const styles = StyleSheet.create({
-  wrapper: {
-    paddingHorizontal: paddingSizes.medium,
-  },
-  headerWrapper: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingTop: paddingSizes.medium,
-  },
-  profileWrapper: {
-    flexDirection: 'row',
-    gap: 10,
-    justifyContent: 'space-between',
-  },
-  profileImg: {
-    width: 50,
-    height: 50,
-    borderRadius: 100,
-  },
-  headerIcons: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    gap: 10,
-  },
-  topDealsScroll: {},
-});

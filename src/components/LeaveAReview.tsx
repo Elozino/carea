@@ -1,21 +1,29 @@
 /* eslint-disable react-native/no-inline-styles */
-import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {getFontSize, paddingSizes, textSizes} from '../constants/styles';
+import {StyleSheet, Text, View} from 'react-native';
+import {GalleryIcon} from '../assets/svg';
+import StarIcon from '../assets/svg/StarIcon';
+import {
+  getFontSize,
+  paddingSizes,
+  SCREEN_height,
+  textSizes,
+} from '../constants/styles';
 import useCareaTheme from '../hooks/useCareaTheme';
 import OrderCard from './OrderCard';
 import AppTextInput from './ui/AppTextInput';
-import {GalleryIcon} from '../assets/svg';
 import {Button} from './ui/Button';
-import {globalStyle} from '../constants/styles';
-import StarIcon from '../assets/svg/StarIcon';
 
 const LeaveAReview = ({closeModal}) => {
   const theme = useCareaTheme();
   return (
     <View
       style={{
-        ...globalStyle.container,
+        height: (2 / 3) * SCREEN_height,
+        backgroundColor: theme?.btn_bg1,
+        borderTopRightRadius: textSizes.medium_1,
+        borderTopLeftRadius: textSizes.medium_1,
+        padding: paddingSizes.medium,
       }}>
       <Text style={[styles.title, {color: theme.btn_bg}]}>Leave a review</Text>
       <View
@@ -26,7 +34,7 @@ const LeaveAReview = ({closeModal}) => {
         }}
       />
       <View style={{marginVertical: paddingSizes.large}}>
-        <OrderCard />
+        <OrderCard isActive={false} />
       </View>
       <View
         style={{
@@ -56,7 +64,7 @@ const LeaveAReview = ({closeModal}) => {
           {Array(5)
             .fill(0)
             .map((_, i) => (
-              <StarIcon key={i} width={25} height={25} />
+              <StarIcon key={i} width={25} height={25} fill={theme.btn_bg} />
             ))}
         </View>
         <AppTextInput rightIcon={<GalleryIcon width={20} height={20} />} />

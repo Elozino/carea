@@ -20,7 +20,7 @@ const ChatBox = ({value, onChangeText, submitHandler}) => {
           style={styles.textInputContainer}
         />
         <Pressable>
-          <GalleryIcon width={24} height={24} />
+          <GalleryIcon width={24} height={24} stroke={theme.btn_bg} />
         </Pressable>
       </View>
       {value.length ? (

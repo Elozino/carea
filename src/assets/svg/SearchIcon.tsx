@@ -9,7 +9,7 @@ const SearchIcon = props => (
     height={props.height ?? 20}
     {...props}>
     <Path
-      stroke={props.fill ?? '#000'}
+      stroke={props.stroke ?? '#000'}
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={2}

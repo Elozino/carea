@@ -52,7 +52,7 @@ const TopDeals = () => {
         </ScrollView>
       </View>
       <FlatList
-        data={Array.from({length: 0})}
+        data={Array.from({length: 11})}
         renderItem={({}) => <ProductListing />}
         keyExtractor={(_, index) => index.toString()}
         showsVerticalScrollIndicator={false}

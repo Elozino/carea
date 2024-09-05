@@ -6,7 +6,7 @@ const GalleryIcon = props => (
     fill="none"
     viewBox="0 0 24 24"
     {...props}>
-    <G stroke={props?.fill ?? '#1C274C'} strokeWidth={1.5}>
+    <G stroke={props?.stroke ?? '#1C274C'} strokeWidth={1.5}>
       <Circle cx={16} cy={8} r={2} />
       <Path
         strokeLinecap="round"

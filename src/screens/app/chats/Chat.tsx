@@ -8,8 +8,10 @@ import SafeInset from '../../../components/layout/SafeInset';
 import Topbar from '../../../components/Topbar';
 import {paddingSizes} from '../../../constants/styles';
 import useCareaTheme from '../../../hooks/useCareaTheme';
+import useHideBottomBar from '../../../hooks/useHideBottomTab';
 
 const Chat = () => {
+  useHideBottomBar();
   const theme = useCareaTheme();
   const {goBack} = useNavigation();
   const [messages, setMessages] = useState<IMessage[]>();
