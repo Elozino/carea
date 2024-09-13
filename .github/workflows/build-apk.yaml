@@ -1,9 +1,9 @@
 name: Carea Android APK
 
-on: 
+on:
   push:
     branches:
-      - "ui"
+      - 'ui'
 
 jobs:
   build:
@@ -17,7 +17,7 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
-          cache: "gradle"
+          cache: 'gradle'
 
       - name: Validate Gradle wrapper
         uses: gradle/wrapper-validation-action@v1
@@ -37,9 +37,7 @@ jobs:
           ./gradlew assembleRelease
 
       - name: Upload Application
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: app-release
           path: android/app/build/outputs/apk/release/app-release.apk
-
-  
