@@ -1,11 +1,12 @@
 import {DefaultTheme, NavigationContainer} from '@react-navigation/native';
+import {ZegoCallInvitationDialog} from '@zegocloud/zego-uikit-prebuilt-call-rn';
 import React from 'react';
 import {Appearance, StatusBar} from 'react-native';
-import {SafeAreaProvider} from 'react-native-safe-area-context';
-import RootStackNavigator from './src/navigators/RootStackNavigator';
-import useCareaTheme from './src/hooks/useCareaTheme';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {globalStyle} from './src/constants/styles';
+import useCareaTheme from './src/hooks/useCareaTheme';
+import RootStackNavigator from './src/navigators/RootStackNavigator';
 
 const App = () => {
   const theme = useCareaTheme();
@@ -29,6 +30,7 @@ const App = () => {
             backgroundColor={theme.bg_1}
           />
           <NavigationContainer theme={MyTheme}>
+            <ZegoCallInvitationDialog />
             <RootStackNavigator />
           </NavigationContainer>
         </SafeAreaProvider>

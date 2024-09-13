@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {View, StyleSheet, Image} from 'react-native';
+import {View, StyleSheet, Image, Text} from 'react-native';
 import {
   ZegoUIKitPrebuiltCall,
   ONE_ON_ONE_VOICE_CALL_CONFIG,
@@ -21,20 +21,42 @@ export default function VoiceCallPage() {
         config={{
           // You can also use ONE_ON_ONE_VOICE_CALL_CONFIG/GROUP_VIDEO_CALL_CONFIG/GROUP_VOICE_CALL_CONFIG to make more types of calls.
           ...ONE_ON_ONE_VOICE_CALL_CONFIG,
+          ringtoneConfig: {
+            incomingCallFileName: 'ring_tone.mp3',
+            outgoingCallFileName: 'ring_tone.mp3',
+          },
           onCallEnd: (callID, reason, duration) => {
             console.log('duration: ', duration);
             console.log('reason: ', reason);
             console.log('callID: ', callID);
             goBack();
           },
+          onOnlySelfInRoom: () => {
+            goBack();
+          },
+          onHangUp: () => {
+            goBack();
+          },
+          //\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+          audioVideoViewConfig: {
+            foregroundBuilder: ({userInfo}) => (
+              <MyForeground userInfo={userInfo} />
+            ),
+          },
           avatarBuilder: avatar,
+          notifyWhenAppRunningInBackgroundOrQuit: true,
+          isIOSSandboxEnvironment: true,
+          androidNotificationConfig: {
+            channelID: 'ZegoUIKit',
+            channelName: 'ZegoUIKit',
+          },
         }}
       />
     </View>
   );
 }
 
-const avatar = () => {
+export const avatar = () => {
   return (
     <View style={{width: '100%', height: '100%'}}>
       <Image
@@ -46,6 +68,11 @@ const avatar = () => {
       />
     </View>
   );
+};
+
+export const MyForeground = ({userInfo}) => {
+  console.log('userInfo: ', userInfo);
+  return <Text> I avatar </Text>;
 };
 
 const styles = StyleSheet.create({

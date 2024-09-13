@@ -19,8 +19,8 @@
   "dependencies": {
     "@gorhom/bottom-sheet": "^4.6.4",
     "@react-navigation/bottom-tabs": "^6.5.20",
-    "@react-navigation/native": "^6.1.9",
-    "@react-navigation/native-stack": "^6.9.17",
+    "@react-navigation/native": "^6.1.18",
+    "@react-navigation/native-stack": "^6.11.0",
     "@react-three/drei": "^9.96.1",
     "@react-three/fiber": "^8.15.14",
     "@zegocloud/zego-uikit-prebuilt-call-rn": "^5.10.2",
@@ -52,7 +52,10 @@
     "react-native-sound": "^0.11.2",
     "react-native-svg": "^15.3.0",
     "three": "^0.160.1",
-    "zego-express-engine-reactnative": "3.14.5"
+    "zego-callkit-react-native": "1.0.6",
+    "zego-express-engine-reactnative": "3.14.5",
+    "zego-zim-react-native": "2.16.0",
+    "zego-zpns-react-native": "2.6.6"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

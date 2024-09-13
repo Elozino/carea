@@ -10,6 +10,10 @@ import {
 } from '../screens';
 import BottomNavigator from './BottomNavigator';
 import {ROUTES} from '../constants/enums';
+import {
+  ZegoUIKitPrebuiltCallInCallScreen,
+  ZegoUIKitPrebuiltCallWaitingScreen,
+} from '@zegocloud/zego-uikit-prebuilt-call-rn';
 
 const Stack = createNativeStackNavigator();
 
@@ -26,6 +30,16 @@ const AuthStackNavigator = () => {
       <Stack.Screen name={ROUTES.CREATE_ACCOUNT} component={CreateAccount} />
       <Stack.Screen name={ROUTES.PROFILE_FORM} component={ProfileForm} />
       <Stack.Screen name={ROUTES.APP} component={BottomNavigator} />
+      <Stack.Screen
+        // DO NOT change the name
+        name="ZegoUIKitPrebuiltCallWaitingScreen"
+        component={ZegoUIKitPrebuiltCallWaitingScreen}
+      />
+      <Stack.Screen
+        // DO NOT change the name
+        name="ZegoUIKitPrebuiltCallInCallScreen"
+        component={ZegoUIKitPrebuiltCallInCallScreen}
+      />
     </Stack.Navigator>
   );
 };
