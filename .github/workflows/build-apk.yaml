@@ -31,10 +31,13 @@ jobs:
         run: |
           yarn install
 
+      - name: Fix Gradle wrapper permissions
+        run: |
+          chmod +x android/gradlew
+
       - name: Build Application
         run: |
           cd android
-          git update-index --chmod=+x gradlew
           ./gradlew assembleRelease
 
       - name: Upload Application
