@@ -34,6 +34,7 @@ jobs:
       - name: Build Application
         run: |
           cd android
+          git update-index --chmod=+x gradlew
           ./gradlew assembleRelease
 
       - name: Upload Application
