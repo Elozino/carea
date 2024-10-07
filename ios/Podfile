@@ -51,5 +51,12 @@ target 'carea' do
       config[:reactNativePath],
       :mac_catalyst_enabled => false
     )
+
+    # Add the following block to update deployment target for all pods
+    installer.pods_project.targets.each do |target|
+      target.build_configurations.each do |config|
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = min_ios_version_supported
+      end
+    end
   end
 end
