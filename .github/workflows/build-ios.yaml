@@ -1,0 +1,47 @@
+name: Carea IOS IPA
+
+on:
+  push:
+    branches:
+      - 'ui'
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '2.7'
+    
+    - name: Setup Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20'
+
+    - name: Install Yarn Global
+      run: |
+        npm install -g yarn
+      
+    - name: Run Yarn Install
+      run: |
+        yarn install
+    
+    - name: Install Cocoapods
+      run: |
+        cd ios
+        pod install
+    
+    - name: Build iOS
+      run: |
+        cd ios
+        xcodebuild -workspace carea.xcworkspace -scheme carea -configuration Release
+
+    - name: Upload IPA
+      uses: actions/upload-artifact@v3
+      with:
+        name: carea.ipa
+        path: ios/artifacts/carea.ipa
