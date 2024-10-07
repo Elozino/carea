@@ -45,6 +45,14 @@ target 'carea' do
   end
 
   post_install do |installer|
+    installer.pods_project.targets.each do |target|
+      if target.name == 'hermes-engine'
+        target.build_phases.each do |build_phase|
+          if build_phase.respond_to?(:name) && build_phase.name.include?('[CP-User] [Hermes]')
+            build_phase.output_paths = ['${PODS_ROOT}/hermes-engine/destroot/Library/Frameworks/hermes.framework']
+          end
+        end
+      end
     # https://github.com/facebook/react-native/blob/main/packages/react-native/scripts/react_native_pods.rb#L197-L202
     react_native_post_install(
       installer,
