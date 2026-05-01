@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: paddingSizes.small,
-    paddingVertical: paddingSizes.xSmall,
+    height: 48,
     borderRadius: 10,
     borderWidth: 0.7,
   },
@@ -69,5 +69,6 @@ const styles = StyleSheet.create({
     fontSize: textSizes.base,
     flex: 1,
     paddingHorizontal: paddingSizes.small,
+    paddingVertical: 0,
   },
 });

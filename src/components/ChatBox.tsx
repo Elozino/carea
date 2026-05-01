@@ -59,10 +59,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'green',
     paddingHorizontal: paddingSizes.small,
+    height: 48,
     borderRadius: textSizes.small,
   },
   textInputContainer: {
     flex: 1,
+    paddingVertical: 0,
   },
   micIconWrapper: {
     borderRadius: 100,
