@@ -6,11 +6,25 @@ const {getDefaultConfig, mergeConfig} = require('@react-native/metro-config');
  *
  * @type {import('metro-config').MetroConfig}
  */
+const defaultConfig = getDefaultConfig(__dirname);
+
 const config = {
+  transformer: {
+    ...defaultConfig.transformer,
+    assetPlugins: [
+      ...(defaultConfig.transformer.assetPlugins || []),
+      'expo-asset/tools/hashAssetFiles',
+    ],
+  },
   resolver: {
-    sourceExts: ['js', 'jsx', 'json', 'ts', 'tsx', 'cjs', 'mjs'],
-    assetExts: ['glb', 'gltf', 'png', 'jpg'],
+    ...defaultConfig.resolver,
+    sourceExts: [
+      ...new Set([...defaultConfig.resolver.sourceExts, 'cjs', 'mjs']),
+    ],
+    assetExts: [
+      ...new Set([...defaultConfig.resolver.assetExts, 'glb', 'gltf']),
+    ],
   },
 };
 
-module.exports = mergeConfig(getDefaultConfig(__dirname), config);
+module.exports = mergeConfig(defaultConfig, config);
