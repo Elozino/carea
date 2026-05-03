@@ -1,15 +1,24 @@
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import React from 'react';
-import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
 import {
-  AppleIcon,
+  Image,
+  KeyboardAvoidingView,
+  Platform,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
+import {
+  AvatarIcon,
   EmailIcon,
-  FacebookIcon,
-  GoogleIcon,
   PadlockIcon,
+  TelephoneIcon,
 } from '../../assets/svg';
 import {AppTextInput} from '../../components';
+import SafeInset from '../../components/layout/SafeInset';
 import {Button} from '../../components/ui/Button';
 import {ROUTES} from '../../constants/enums';
 import {getFontSize, paddingSizes} from '../../constants/styles';
@@ -20,63 +29,160 @@ const CreateAccount = () => {
   const theme = useCareaTheme();
   const {navigate} =
     useNavigation<NativeStackNavigationProp<AuthStackParams>>();
+  const themedStyles = createThemedStyles(theme);
+  const iconProps = createIconProps(theme);
+  const [form, setForm] = React.useState({
+    email: '',
+    password: '',
+    firstName: '',
+    lastName: '',
+    phone: '',
+  });
+
+  const updateField = (field: keyof typeof form) => (value: string) => {
+    setForm(current => ({...current, [field]: value}));
+  };
+
   return (
-    <View style={[styles.wrapper, {backgroundColor: theme.bg_1}]}>
-      <View style={[styles.imageWrapper]}>
-        <Image
-          source={require('../../assets/images/car.png')}
-          resizeMode="contain"
-          style={styles.image}
-        />
-      </View>
-      <Text style={[styles.title, {color: theme.text_1}]}>
-        Create Your Account
-      </Text>
-      <View style={[styles.formWrapper]}>
-        <AppTextInput placeholder="Email" leftIcon={<EmailIcon />} />
-        <AppTextInput placeholder="Password" leftIcon={<PadlockIcon />} />
-        <View style={{marginTop: paddingSizes.small}} />
-        <Button
-          text={'Sign up'}
-          onPress={() => navigate(ROUTES.PROFILE_FORM)}
-        />
-      </View>
-      <View style={[styles.divider]}>
-        <View style={[styles.lineRule, {backgroundColor: theme.text_1}]} />
-        <Text style={{color: theme.text_1}}>or continue with</Text>
-        <View style={[styles.lineRule, {backgroundColor: theme.text_1}]} />
-      </View>
-      <View style={[styles.socials]}>
-        <Button
-          icon={<GoogleIcon />}
-          style={{...styles.socialsBtn, backgroundColor: theme.btn_bg1}}
-        />
-        <Button
-          icon={<FacebookIcon />}
-          style={{...styles.socialsBtn, backgroundColor: theme.btn_bg1}}
-        />
-        <Button
-          icon={<AppleIcon fill={theme.btn_bg} />}
-          style={{...styles.socialsBtn, backgroundColor: theme.btn_bg1}}
-        />
-      </View>
-      <View style={[styles.accWrapper]}>
-        <Text style={[{color: theme.text_1}]}>Do have an account? </Text>
-        <Pressable onPress={() => navigate(ROUTES.LOGIN)}>
-          <Text style={{color: theme.text_1, fontWeight: '900'}}>Sign in</Text>
-        </Pressable>
-      </View>
-    </View>
+    <SafeInset style={themedStyles.wrapper}>
+      <KeyboardAvoidingView
+        style={styles.keyboardAwareWrapper}
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+        // keyboardVerticalOffset={Platform.OS === 'ios' ? insets.top : 0}
+      >
+        <ScrollView
+          bounces={false}
+          showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps="handled"
+          keyboardDismissMode={
+            Platform.OS === 'ios' ? 'interactive' : 'on-drag'
+          }
+          contentContainerStyle={styles.scrollContent}>
+          <View style={styles.content}>
+            <View style={styles.imageWrapper}>
+              <Image
+                source={require('../../assets/images/car.png')}
+                resizeMode="contain"
+                style={styles.image}
+              />
+            </View>
+            <Text style={[styles.title, themedStyles.title]}>
+              Create Your Account
+            </Text>
+            <View style={styles.formWrapper}>
+              <AppTextInput
+                placeholder="First Name"
+                leftIcon={<AvatarIcon {...iconProps.avatar} />}
+                value={form.firstName}
+                onChangeText={updateField('firstName')}
+                autoCapitalize="words"
+                textContentType="givenName"
+                returnKeyType="next"
+              />
+              <AppTextInput
+                placeholder="Last Name"
+                leftIcon={<AvatarIcon {...iconProps.avatar} />}
+                value={form.lastName}
+                onChangeText={updateField('lastName')}
+                autoCapitalize="words"
+                textContentType="familyName"
+                returnKeyType="next"
+              />
+              <AppTextInput
+                placeholder="Email"
+                leftIcon={<EmailIcon />}
+                value={form.email}
+                onChangeText={updateField('email')}
+                keyboardType="email-address"
+                autoCapitalize="none"
+                autoCorrect={false}
+                textContentType="emailAddress"
+                returnKeyType="next"
+              />
+              <AppTextInput
+                placeholder="Phone Number"
+                leftIcon={<TelephoneIcon {...iconProps.phone} />}
+                value={form.phone}
+                onChangeText={updateField('phone')}
+                keyboardType="phone-pad"
+                textContentType="telephoneNumber"
+                returnKeyType="next"
+              />
+              <AppTextInput
+                placeholder="Password"
+                leftIcon={<PadlockIcon />}
+                value={form.password}
+                onChangeText={updateField('password')}
+                secureTextEntry
+                autoCapitalize="none"
+                autoCorrect={false}
+                textContentType="newPassword"
+                returnKeyType="done"
+              />
+              <View style={styles.formSpacing} />
+              <Button
+                text={'Sign up'}
+                onPress={() => navigate(ROUTES.PROFILE_FORM)}
+              />
+            </View>
+            <View style={styles.accWrapper}>
+              <Text style={themedStyles.accountText}>
+                Do you have an account?{' '}
+              </Text>
+              <Pressable onPress={() => navigate(ROUTES.LOGIN)}>
+                <Text style={[styles.signInText, themedStyles.signInText]}>
+                  Sign in
+                </Text>
+              </Pressable>
+            </View>
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </SafeInset>
   );
 };
 
 export default CreateAccount;
 
+const createThemedStyles = (theme: ReturnType<typeof useCareaTheme>) =>
+  StyleSheet.create({
+    wrapper: {
+      backgroundColor: theme.bg_1,
+    },
+    title: {
+      color: theme.text_1,
+    },
+    accountText: {
+      color: theme.text_1,
+    },
+    signInText: {
+      color: theme.text_1,
+    },
+  });
+
+const createIconProps = (theme: ReturnType<typeof useCareaTheme>) => ({
+  avatar: {
+    fill: theme.btn_bg,
+  },
+  phone: {
+    fill: theme.btn_bg,
+    width: 20,
+    height: 20,
+  },
+});
+
 const styles = StyleSheet.create({
-  wrapper: {
+  keyboardAwareWrapper: {
+    flex: 1,
+  },
+  scrollContent: {
+    flexGrow: 1,
+  },
+  content: {
     paddingHorizontal: paddingSizes.medium,
     justifyContent: 'center',
     flex: 1,
+    paddingBottom: paddingSizes.large,
   },
   imageWrapper: {
     justifyContent: 'center',
@@ -95,32 +201,16 @@ const styles = StyleSheet.create({
   formWrapper: {
     gap: 12,
   },
-  divider: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    gap: 20,
-    marginTop: paddingSizes.xLarge,
-  },
-  lineRule: {
-    height: 0.5,
-    width: '30%',
-  },
-  socials: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: 15,
-    marginTop: paddingSizes.large,
-  },
-  socialsBtn: {
-    width: '25%',
-    borderRadius: 15,
+  formSpacing: {
+    marginTop: paddingSizes.small,
   },
   accWrapper: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: paddingSizes.medium,
+  },
+  signInText: {
+    fontWeight: '900',
   },
 });

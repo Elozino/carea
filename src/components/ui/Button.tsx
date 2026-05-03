@@ -2,6 +2,7 @@ import React, {FC} from 'react';
 import {
   Pressable,
   PressableProps,
+  StyleProp,
   StyleSheet,
   Text,
   TextStyle,
@@ -11,9 +12,9 @@ import {textSizes, widthAndHeight} from '../../constants/styles';
 import useCareaTheme from '../../hooks/useCareaTheme';
 
 type IButton = PressableProps & {
-  style?: ViewStyle;
+  style?: StyleProp<ViewStyle>;
   text?: string;
-  textStyle?: TextStyle;
+  textStyle?: StyleProp<TextStyle>;
   loading?: boolean;
   onPress?: () => void;
   icon?: JSX.Element;
