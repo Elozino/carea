@@ -1,76 +1,114 @@
 import React, {useEffect} from 'react';
 import {ImageBackground, StatusBar, StyleSheet, Text, View} from 'react-native';
-import {paddingSizes, textSizes} from '../constants/styles';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import {useNavigation} from '@react-navigation/native';
 import {ROUTES} from '../constants/enums';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {AuthStackParams} from '../types/navigation';
 
 const Welcome = () => {
-  const {navigate} =
-    useNavigation<NativeStackNavigationProp<AuthStackParams>>();
+  const {replace} = useNavigation<NativeStackNavigationProp<AuthStackParams>>();
+
   useEffect(() => {
     const timeout = setTimeout(() => {
-      navigate(ROUTES.GET_STARTED);
-    }, 2000);
+      replace(ROUTES.GET_STARTED);
+    }, 2200);
 
     return () => {
       clearTimeout(timeout);
     };
-  }, [navigate]);
+  }, [replace]);
 
   return (
-    <>
+    <View style={styles.screen}>
       <StatusBar
         translucent
         backgroundColor="transparent"
-        barStyle={'default'}
+        barStyle="light-content"
       />
       <ImageBackground
-        source={require('../assets/images/onboarding1.jpg')}
-        style={styles.container}
+        source={require('../assets/images/onboarding-welcome-hero.jpg')}
+        style={styles.screen}
+        imageStyle={styles.backgroundImage}
         resizeMode="cover">
-        <View style={styles.wrapper}>
-          <Text style={[styles.textColor, styles.welcomeText]}>
-            Welcome to 👋
-          </Text>
-          <Text style={[styles.textColor, styles.brandName]}>Carea</Text>
-          <Text style={[styles.textColor, styles.description]}>
-            The best car marketplace app of the century for your transportation
-            needs!
-          </Text>
-        </View>
+        <View style={styles.backgroundShade} />
+        <View style={styles.bottomShade} />
+        <SafeAreaView edges={['top', 'bottom']} style={styles.safeArea}>
+          <View style={styles.content}>
+            <View />
+            <View style={styles.copyBlock}>
+              <Text style={styles.welcomeText}>Welcome to 👋</Text>
+              <Text style={styles.brandName}>Carea</Text>
+              <Text style={styles.description}>
+                The best car marketplace app of the century for your
+                transportation needs!
+              </Text>
+            </View>
+          </View>
+        </SafeAreaView>
       </ImageBackground>
-    </>
+    </View>
   );
 };
 
 export default Welcome;
 
 const styles = StyleSheet.create({
-  container: {
+  screen: {
     flex: 1,
   },
-  wrapper: {
+  backgroundImage: {
+    transform: [{scale: 1.04}],
+  },
+  safeArea: {
     flex: 1,
-    justifyContent: 'flex-end',
-    padding: paddingSizes.medium,
-    marginBottom: paddingSizes.large,
+  },
+  backgroundShade: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: 'rgba(7, 11, 18, 0.16)',
+  },
+  bottomShade: {
+    position: 'absolute',
+    right: 0,
+    bottom: 0,
+    left: 0,
+    height: '48%',
+    backgroundColor: 'rgba(7, 11, 18, 0.48)',
+  },
+  content: {
+    flex: 1,
+    justifyContent: 'space-between',
+    paddingHorizontal: 26,
+    paddingTop: 12,
+    paddingBottom: 26,
+  },
+  copyBlock: {
+    gap: 12,
   },
   welcomeText: {
-    fontSize: textSizes.large,
+    color: '#FFFFFF',
+    fontSize: 26,
     fontWeight: '700',
+    lineHeight: 32,
+    textShadowColor: 'rgba(0, 0, 0, 0.18)',
+    textShadowOffset: {width: 0, height: 2},
+    textShadowRadius: 10,
   },
   brandName: {
-    fontSize: textSizes.xxLarge,
+    color: '#FFFFFF',
+    fontSize: 66,
     fontWeight: '800',
+    lineHeight: 70,
+    letterSpacing: -2.2,
+    textShadowColor: 'rgba(0, 0, 0, 0.2)',
+    textShadowOffset: {width: 0, height: 3},
+    textShadowRadius: 12,
   },
   description: {
-    fontSize: textSizes.medium,
-    fontWeight: '600',
-  },
-  textColor: {
-    color: 'white',
-    fontSize: 24,
+    maxWidth: '84%',
+    color: 'rgba(255, 255, 255, 0.95)',
+    fontSize: 17,
+    fontWeight: '500',
+    lineHeight: 24,
   },
 });
