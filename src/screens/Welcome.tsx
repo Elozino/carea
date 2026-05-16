@@ -1,12 +1,33 @@
-import React, {useEffect} from 'react';
-import {ImageBackground, StatusBar, StyleSheet, Text, View} from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
 import {useNavigation} from '@react-navigation/native';
-import {ROUTES} from '../constants/enums';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {BlurView} from 'expo-blur';
+import React, {useEffect} from 'react';
+import {
+  ImageBackground,
+  ImageStyle,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {
+  borderWidths,
+  interactionScales,
+  letterSpacings,
+  opacityLevels,
+  paddingSizes,
+  radiusSizes,
+  shadowPresets,
+  textSizes,
+  widthAndHeight,
+} from '../constants/styles';
+import {ROUTES} from '../constants/enums';
+import useCareaTheme from '../hooks/useCareaTheme';
 import {AuthStackParams} from '../types/navigation';
 
 const Welcome = () => {
+  const theme = useCareaTheme();
   const {replace} = useNavigation<NativeStackNavigationProp<AuthStackParams>>();
 
   useEffect(() => {
@@ -20,7 +41,7 @@ const Welcome = () => {
   }, [replace]);
 
   return (
-    <View style={styles.screen}>
+    <View style={[styles.screen, {backgroundColor: theme.background.app}]}>
       <StatusBar
         translucent
         backgroundColor="transparent"
@@ -29,20 +50,54 @@ const Welcome = () => {
       <ImageBackground
         source={require('../assets/images/onboarding-welcome-hero.jpg')}
         style={styles.screen}
-        imageStyle={styles.backgroundImage}
+        imageStyle={backgroundImageStyle}
         resizeMode="cover">
-        <View style={styles.backgroundShade} />
-        <View style={styles.bottomShade} />
+        <View
+          style={[
+            styles.backgroundShade,
+            {backgroundColor: theme.background.overlay},
+          ]}
+        />
+        <View style={[styles.bottomShade, {backgroundColor: theme.scrim}]} />
         <SafeAreaView edges={['top', 'bottom']} style={styles.safeArea}>
           <View style={styles.content}>
             <View />
-            <View style={styles.copyBlock}>
-              <Text style={styles.welcomeText}>Welcome to 👋</Text>
-              <Text style={styles.brandName}>Carea</Text>
-              <Text style={styles.description}>
-                The best car marketplace app of the century for your
-                transportation needs!
-              </Text>
+            <View style={[styles.copyShell, {shadowColor: theme.shadowColor}]}>
+              <BlurView
+                intensity={theme.glass.blurIntensity.strong}
+                tint={theme.glass.blurTint}
+                style={StyleSheet.absoluteFill}
+              />
+              <View
+                pointerEvents="none"
+                style={[
+                  styles.copyMembrane,
+                  {backgroundColor: theme.glass.background.medium},
+                ]}
+              />
+              <View
+                pointerEvents="none"
+                style={[
+                  styles.copyHighlight,
+                  {backgroundColor: theme.glass.highlight.soft},
+                ]}
+              />
+              <View
+                style={[
+                  styles.copyBlock,
+                  {borderColor: theme.glass.border.medium},
+                ]}>
+                <Text style={[styles.welcomeText, {color: theme.text.inverse}]}>
+                  Welcome to 👋
+                </Text>
+                <Text style={[styles.brandName, {color: theme.text.inverse}]}>
+                  Carea
+                </Text>
+                <Text style={[styles.description, {color: theme.text.inverse}]}>
+                  The best car marketplace app of the century for your
+                  transportation needs!
+                </Text>
+              </View>
             </View>
           </View>
         </SafeAreaView>
@@ -53,62 +108,71 @@ const Welcome = () => {
 
 export default Welcome;
 
+const backgroundImageStyle: ImageStyle = {
+  transform: [{scale: interactionScales.heroMedia}],
+};
+
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-  },
-  backgroundImage: {
-    transform: [{scale: 1.04}],
   },
   safeArea: {
     flex: 1,
   },
   backgroundShade: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(7, 11, 18, 0.16)',
   },
   bottomShade: {
     position: 'absolute',
     right: 0,
     bottom: 0,
     left: 0,
-    height: '48%',
-    backgroundColor: 'rgba(7, 11, 18, 0.48)',
+    height: widthAndHeight.half,
   },
   content: {
     flex: 1,
     justifyContent: 'space-between',
-    paddingHorizontal: 26,
-    paddingTop: 12,
-    paddingBottom: 26,
+    paddingHorizontal: paddingSizes.medium_1,
+    paddingTop: paddingSizes.small,
+    paddingBottom: paddingSizes.large_1,
+  },
+  copyShell: {
+    borderRadius: radiusSizes.xxLarge,
+    overflow: 'hidden',
+    ...shadowPresets.floating,
   },
   copyBlock: {
-    gap: 12,
+    gap: Number(paddingSizes.small) + borderWidths.thick,
+    padding: paddingSizes.large_1,
+    borderRadius: radiusSizes.xxLarge,
+    borderWidth: borderWidths.thin,
   },
   welcomeText: {
-    color: '#FFFFFF',
-    fontSize: 26,
+    fontSize: textSizes.medium_1,
     fontWeight: '700',
-    lineHeight: 32,
-    textShadowColor: 'rgba(0, 0, 0, 0.18)',
-    textShadowOffset: {width: 0, height: 2},
-    textShadowRadius: 10,
+    lineHeight: Number(paddingSizes.large),
   },
   brandName: {
-    color: '#FFFFFF',
-    fontSize: 66,
+    fontSize: textSizes.display,
     fontWeight: '800',
-    lineHeight: 70,
-    letterSpacing: -2.2,
-    textShadowColor: 'rgba(0, 0, 0, 0.2)',
-    textShadowOffset: {width: 0, height: 3},
-    textShadowRadius: 12,
+    letterSpacing: letterSpacings.display,
   },
   description: {
-    maxWidth: '84%',
-    color: 'rgba(255, 255, 255, 0.95)',
-    fontSize: 17,
+    paddingRight: paddingSizes.xLarge,
+    fontSize: textSizes.normal,
     fontWeight: '500',
-    lineHeight: 24,
+    lineHeight: Number(paddingSizes.large_1),
+    opacity: opacityLevels.strong,
+  },
+  copyMembrane: {
+    ...StyleSheet.absoluteFillObject,
+  },
+  copyHighlight: {
+    position: 'absolute',
+    top: 0,
+    left: paddingSizes.medium,
+    right: paddingSizes.medium,
+    height: borderWidths.thin,
+    borderRadius: borderWidths.thin,
   },
 });

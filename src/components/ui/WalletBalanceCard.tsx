@@ -1,5 +1,15 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
+import {BlurView} from 'expo-blur';
+import {
+  borderWidths,
+  letterSpacings,
+  opacityLevels,
+  paddingSizes,
+  radiusSizes,
+  shadowPresets,
+  textSizes,
+} from '../../constants/styles';
 import useCareaTheme from '../../hooks/useCareaTheme';
 
 type WalletBalanceCardProps = {
@@ -18,85 +28,138 @@ const WalletBalanceCard = ({
   const theme = useCareaTheme();
 
   return (
-    <View style={[styles.card, {backgroundColor: theme.btn_bg}]}>
-      <View style={styles.topRow}>
-        <Text style={[styles.cardLabel, {color: theme.btn_text}]}>
-          {cardLabel}
-        </Text>
-        <View style={styles.networkRow}>
-          <View style={[styles.circle, styles.circleLeft]} />
-          <View style={[styles.circle, styles.circleRight]} />
-        </View>
-      </View>
-      <Text style={[styles.balance, {color: theme.btn_text}]}>
-        {formatBalance(balance)}
-      </Text>
-      <View style={styles.bottomRow}>
-        {last4 ? (
-          <Text style={[styles.cardNum, {color: theme.btn_text}]}>
-            ●●●● ●●●● ●●●● {last4}
+    <View style={[styles.shell, {shadowColor: theme.shadowColor}]}>
+      <View style={[styles.card, {borderColor: theme.glass.border.medium}]}>
+        <BlurView
+          intensity={theme.glass.blurIntensity.strong}
+          tint={theme.glass.blurTint}
+          style={StyleSheet.absoluteFill}
+        />
+        <View
+          pointerEvents="none"
+          style={[
+            styles.membrane,
+            {backgroundColor: theme.glass.background.strong},
+          ]}
+        />
+        <View
+          pointerEvents="none"
+          style={[
+            styles.highlight,
+            {backgroundColor: theme.glass.highlight.soft},
+          ]}
+        />
+        <View style={styles.content}>
+          <View style={styles.topRow}>
+            <Text style={[styles.cardLabel, {color: theme.text.secondary}]}>
+              {cardLabel}
+            </Text>
+            <View style={styles.networkRow}>
+              <View
+                style={[
+                  styles.circle,
+                  styles.circleLeft,
+                  {backgroundColor: theme.brand.mastercardRed},
+                ]}
+              />
+              <View
+                style={[
+                  styles.circle,
+                  styles.circleRight,
+                  {backgroundColor: theme.brand.mastercardOrange},
+                ]}
+              />
+            </View>
+          </View>
+          <Text style={[styles.balance, {color: theme.text.primary}]}>
+            {formatBalance(balance)}
           </Text>
-        ) : (
-          <Text style={[styles.cardType, {color: theme.btn_text}]}>VISA</Text>
-        )}
+          <View style={styles.bottomRow}>
+            {last4 ? (
+              <Text style={[styles.cardNum, {color: theme.text.secondary}]}>
+                ●●●● ●●●● ●●●● {last4}
+              </Text>
+            ) : (
+              <Text style={[styles.cardType, {color: theme.text.primary}]}>
+                VISA
+              </Text>
+            )}
+          </View>
+        </View>
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  shell: {
+    marginHorizontal: paddingSizes.medium_1,
+    marginBottom: paddingSizes.large_1,
+    borderRadius: radiusSizes.xLarge,
+    ...shadowPresets.floating,
+  },
   card: {
-    borderRadius: 20,
-    padding: 24,
-    marginHorizontal: 20,
-    marginBottom: 24,
+    overflow: 'hidden',
+    borderRadius: radiusSizes.xLarge,
+    borderWidth: borderWidths.thin,
+  },
+  membrane: {
+    ...StyleSheet.absoluteFillObject,
+  },
+  highlight: {
+    position: 'absolute',
+    top: 0,
+    left: paddingSizes.medium,
+    right: paddingSizes.medium,
+    height: borderWidths.thin,
+    borderRadius: borderWidths.thin,
+  },
+  content: {
+    padding: paddingSizes.large_1,
   },
   topRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 20,
+    marginBottom: paddingSizes.medium_1,
   },
   cardLabel: {
-    fontSize: 14,
+    fontSize: textSizes.base,
     fontWeight: '500',
-    opacity: 0.8,
+    opacity: opacityLevels.soft,
   },
   networkRow: {
     flexDirection: 'row',
   },
   circle: {
-    width: 28,
-    height: 28,
-    borderRadius: 14,
-    opacity: 0.8,
+    width: radiusSizes.xLarge,
+    height: radiusSizes.xLarge,
+    borderRadius: radiusSizes.medium,
+    opacity: opacityLevels.soft,
   },
   circleLeft: {
-    backgroundColor: '#EB001B',
-    marginRight: -8,
+    marginRight: -(radiusSizes.xSmall + borderWidths.thick),
   },
-  circleRight: {
-    backgroundColor: '#F79E1B',
-  },
+  circleRight: {},
   balance: {
-    fontSize: 32,
+    fontSize: textSizes.large_1,
     fontWeight: '800',
-    marginBottom: 20,
+    marginBottom: paddingSizes.medium_1,
   },
   bottomRow: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
   },
   cardNum: {
-    fontSize: 13,
-    letterSpacing: 2,
-    opacity: 0.8,
+    fontSize: textSizes.base,
+    letterSpacing: letterSpacings.wider,
+    opacity: opacityLevels.soft,
   },
   cardType: {
-    fontSize: 18,
+    fontSize: textSizes.medium,
     fontWeight: '800',
     fontStyle: 'italic',
-    opacity: 0.9,
+    opacity: opacityLevels.strong,
   },
 });
 

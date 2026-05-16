@@ -7,7 +7,8 @@ import AuthStackNavigator from './AuthStackNavigator';
 const RootStackNavigator = () => {
   const theme = useCareaTheme();
   return (
-    <View style={{backgroundColor: theme.bg_1, ...globalStyle.container}}>
+    <View
+      style={[globalStyle.container, {backgroundColor: theme.background.app}]}>
       <AuthStackNavigator />
     </View>
   );

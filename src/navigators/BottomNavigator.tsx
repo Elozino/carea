@@ -1,8 +1,8 @@
 /* eslint-disable react/no-unstable-nested-components */
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {BlurTint, BlurView} from 'expo-blur';
+import {BlurView} from 'expo-blur';
 import React from 'react';
-import {Appearance, Platform, StyleSheet} from 'react-native';
+import {Platform, StyleSheet, View} from 'react-native';
 import {
   AvatarIcon,
   ChatIcon,
@@ -10,6 +10,14 @@ import {
   OrderIcon,
   WalletIcon,
 } from '../assets/svg';
+import {
+  borderWidths,
+  componentSizes,
+  paddingSizes,
+  radiusSizes,
+  shadowPresets,
+  widthAndHeight,
+} from '../constants/styles';
 import {ROUTES} from '../constants/enums';
 import useCareaTheme from '../hooks/useCareaTheme';
 import HomeStackNavigator from './HomeStackNavigator';
@@ -20,15 +28,37 @@ import ProfileStackNavigator from './ProfileStackNavigator';
 
 const Tab = createBottomTabNavigator();
 
-type Blur = BlurTint | 'dark' | 'light';
+const TabBG = () => {
+  const theme = useCareaTheme();
 
-const TabBG = () => (
-  <BlurView
-    tint={Appearance.getColorScheme() as Blur}
-    intensity={100}
-    style={StyleSheet.absoluteFill}
-  />
-);
+  return (
+    <>
+      <BlurView
+        tint={theme.glass.blurTint}
+        intensity={theme.glass.blurIntensity.strong}
+        style={StyleSheet.absoluteFill}
+      />
+      <View
+        pointerEvents="none"
+        style={[
+          StyleSheet.absoluteFill,
+          styles.tabBarMembrane,
+          {
+            backgroundColor: theme.glass.background.medium,
+            borderTopColor: theme.glass.border.subtle,
+          },
+        ]}
+      />
+      <View
+        pointerEvents="none"
+        style={[
+          styles.tabBarHighlight,
+          {backgroundColor: theme.glass.highlight.soft},
+        ]}
+      />
+    </>
+  );
+};
 
 const BottomNavigator = () => {
   const theme = useCareaTheme();
@@ -41,16 +71,19 @@ const BottomNavigator = () => {
         tabBarShowLabel: false,
         tabBarStyle: {
           position: 'absolute',
-          shadowOffset: {
-            height: 0,
-            width: 0,
-          },
-          shadowOpacity: 0,
-          elevation: 0,
-          height: Platform.OS === 'ios' ? 100 : 70,
+          overflow: 'hidden',
+          backgroundColor: 'transparent',
+          height:
+            Platform.OS === 'ios'
+              ? widthAndHeight.tabBarIos
+              : widthAndHeight.tabBarAndroid,
           borderTopWidth: 0,
+          borderTopLeftRadius: radiusSizes.xLarge,
+          borderTopRightRadius: radiusSizes.xLarge,
+          shadowColor: theme.shadowColor,
+          ...shadowPresets.medium,
         },
-        tabBarActiveTintColor: theme.btn_bg,
+        tabBarActiveTintColor: theme.navigation.primary,
         tabBarBackground: TabBG,
       }}>
       <Tab.Screen
@@ -59,9 +92,9 @@ const BottomNavigator = () => {
         options={{
           tabBarIcon: ({focused}) => (
             <HomeIcon
-              fill={focused ? theme.btn_bg : 'gray'}
-              width={30}
-              height={30}
+              fill={focused ? theme.navigation.primary : theme.text.tertiary}
+              width={componentSizes.iconXLarge}
+              height={componentSizes.iconXLarge}
             />
           ),
         }}
@@ -72,9 +105,9 @@ const BottomNavigator = () => {
         options={{
           tabBarIcon: ({focused}) => (
             <OrderIcon
-              fill={focused ? theme.btn_bg : 'gray'}
-              width={30}
-              height={30}
+              fill={focused ? theme.navigation.primary : theme.text.tertiary}
+              width={componentSizes.iconXLarge}
+              height={componentSizes.iconXLarge}
             />
           ),
         }}
@@ -85,9 +118,9 @@ const BottomNavigator = () => {
         options={{
           tabBarIcon: ({focused}) => (
             <ChatIcon
-              fill={focused ? theme.btn_bg : 'gray'}
-              width={30}
-              height={30}
+              fill={focused ? theme.navigation.primary : theme.text.tertiary}
+              width={componentSizes.iconXLarge}
+              height={componentSizes.iconXLarge}
             />
           ),
         }}
@@ -98,9 +131,9 @@ const BottomNavigator = () => {
         options={{
           tabBarIcon: ({focused}) => (
             <WalletIcon
-              fill={focused ? theme.btn_bg : 'gray'}
-              width={30}
-              height={30}
+              fill={focused ? theme.navigation.primary : theme.text.tertiary}
+              width={componentSizes.iconXLarge}
+              height={componentSizes.iconXLarge}
             />
           ),
         }}
@@ -111,9 +144,9 @@ const BottomNavigator = () => {
         options={{
           tabBarIcon: ({focused}) => (
             <AvatarIcon
-              fill={focused ? theme.btn_bg : 'gray'}
-              width={40}
-              height={40}
+              fill={focused ? theme.navigation.primary : theme.text.tertiary}
+              width={componentSizes.iconXXLarge}
+              height={componentSizes.iconXXLarge}
             />
           ),
         }}
@@ -123,3 +156,17 @@ const BottomNavigator = () => {
 };
 
 export default BottomNavigator;
+
+const styles = StyleSheet.create({
+  tabBarMembrane: {
+    borderTopWidth: borderWidths.thin,
+  },
+  tabBarHighlight: {
+    position: 'absolute',
+    top: 0,
+    left: paddingSizes.medium,
+    right: paddingSizes.medium,
+    height: borderWidths.thin,
+    borderRadius: borderWidths.thin,
+  },
+});
