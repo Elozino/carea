@@ -1,11 +1,7 @@
 import * as React from 'react';
-import Svg, {Path} from 'react-native-svg';
-const RecordStackIcon = props => (
-  <Svg
-    xmlns="http://www.w3.org/2000/svg"
-    className="icon"
-    viewBox="0 0 1024 1024"
-    {...props}>
+import Svg, {Path, SvgProps} from 'react-native-svg';
+const RecordStackIcon = (props: SvgProps) => (
+  <Svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" {...props}>
     <Path
       fill="#575a5b"
       d="M862.906 932.188H162.97c-38.719 0-70.125-31.407-70.125-70.125V432.5c0-38.719 31.406-70.125 70.125-70.125h699.937c38.719 0 70.125 31.406 70.125 70.125v429.563c0 38.718-31.406 70.125-70.125 70.125z"

@@ -6,6 +6,7 @@ import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {globalStyle} from './src/constants/styles';
 import useCareaTheme from './src/hooks/useCareaTheme';
+import linking from './src/navigators/linking';
 import RootStackNavigator from './src/navigators/RootStackNavigator';
 
 const App = () => {
@@ -29,7 +30,7 @@ const App = () => {
             }
             backgroundColor={theme.bg_1}
           />
-          <NavigationContainer theme={MyTheme}>
+          <NavigationContainer linking={linking} theme={MyTheme}>
             <ZegoCallInvitationDialog />
             <RootStackNavigator />
           </NavigationContainer>

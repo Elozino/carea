@@ -10,6 +10,11 @@ import * as ZPNs from 'zego-zpns-react-native';
 import {zegoConfig} from '../components/libs/zeego/data';
 import {avatar} from '../components/libs/zeego/ZeegoCall';
 
+type RequireConfigData = {
+  invitees: unknown[];
+  type: number;
+};
+
 export const zegoInit = async (userID = '1234', userName = 'zino') => {
   return ZegoUIKitPrebuiltCallService.init(
     zegoConfig.appID,
@@ -22,7 +27,7 @@ export const zegoInit = async (userID = '1234', userName = 'zino') => {
         incomingCallFileName: 'ring_tone.mp3',
         outgoingCallFileName: 'ring_tone.mp3',
       },
-      requireConfig: data => {
+      requireConfig: (data: RequireConfigData) => {
         const callConfig =
           data.invitees.length > 1
             ? ZegoInvitationType.videoCall === data.type

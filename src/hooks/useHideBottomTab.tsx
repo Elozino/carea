@@ -1,11 +1,11 @@
 import {useNavigation} from '@react-navigation/native';
-import {useLayoutEffect} from 'react';
+import {useEffect} from 'react';
 import {Platform} from 'react-native';
 
 const useHideBottomBar = () => {
   const navigation = useNavigation();
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     navigation
       .getParent()
       ?.setOptions({tabBarStyle: {display: 'none'}, tabBarVisible: false});

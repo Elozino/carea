@@ -1,0 +1,24 @@
+name: Feature request
+description: Propose a product or platform improvement with measurable value.
+title: '[Feature]: '
+labels: ['feature']
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or opportunity
+      description: What user, business, or operational need are we solving?
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Desired outcome
+      description: Describe success in observable terms.
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope notes
+      description: Constraints, dependencies, rollout notes, or non-goals.

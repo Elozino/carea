@@ -1,7 +1,12 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import {TouchableOpacity} from 'react-native';
-import {Bubble, GiftedChat, IMessage} from 'react-native-gifted-chat';
+import {
+  Bubble,
+  BubbleProps,
+  GiftedChat,
+  IMessage,
+} from 'react-native-gifted-chat';
 import {ArrowLeftIcon, TelephoneIcon} from '../../../assets/svg';
 import ChatBox from '../../../components/ChatBox';
 import SafeInset from '../../../components/layout/SafeInset';
@@ -52,7 +57,7 @@ const Chat = () => {
     setInputMessage('');
   };
 
-  const renderMessage = props => {
+  const renderMessage = (props: BubbleProps<IMessage>) => {
     const {currentMessage} = props;
 
     if (currentMessage?.user?._id === 1) {

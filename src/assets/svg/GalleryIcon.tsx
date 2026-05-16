@@ -1,6 +1,6 @@
 import * as React from 'react';
-import Svg, {G, Circle, Path} from 'react-native-svg';
-const GalleryIcon = props => (
+import Svg, {G, Circle, Path, SvgProps} from 'react-native-svg';
+const GalleryIcon = (props: SvgProps) => (
   <Svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"

@@ -1,16 +1,14 @@
 import React from 'react';
-import Svg, {Path} from 'react-native-svg';
+import Svg, {Path, SvgProps} from 'react-native-svg';
 
-const ArrowLeftIcon = props => {
+const ArrowLeftIcon = (props: SvgProps) => {
   const defaultSize = 16; // Set a default size for width and height
   const scaleFactor = 2; // Scale the icon by a factor of 2
+  const width = typeof props.width === 'number' ? props.width : defaultSize;
+  const height = typeof props.height === 'number' ? props.height : defaultSize;
 
-  const calculatedWidth = props.width
-    ? props.width * scaleFactor
-    : defaultSize * scaleFactor;
-  const calculatedHeight = props.height
-    ? props.height * scaleFactor
-    : defaultSize * scaleFactor;
+  const calculatedWidth = width * scaleFactor;
+  const calculatedHeight = height * scaleFactor;
 
   return (
     <Svg

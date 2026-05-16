@@ -1,83 +1,79 @@
-### UI SNIPPET
+# Carea Mobile
 
-![HOME](/src/assets/ui-snippet/home.jpeg)
+![Home screen preview](./src/assets/ui-snippet/home.jpeg)
 
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+Carea Mobile is a React Native application with themed UI, multi-screen navigation, commerce-style discovery flows, and calling integrations. This repository is now set up for a stronger AI-assisted engineering workflow with clearer standards, repeatable validation, and production-minded team conventions.
 
-# Getting Started
+## Stack
 
-> **Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+- React Native `0.73`
+- React `18`
+- TypeScript
+- React Navigation
+- Expo modules where useful
+- Jest + ESLint + Prettier + Husky
 
-## Step 1: Start the Metro Server
+## Quick Start
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+### Prerequisites
 
-To start Metro, run the following command from the _root_ of your React Native project:
+- Node `20.x`
+- Yarn `1.x`
+- Xcode for iOS development
+- Android Studio for Android development
+
+### Install
 
 ```bash
-# using npm
-npm start
+yarn install
+```
 
-# OR using Yarn
+### Run
+
+```bash
 yarn start
-```
-
-## Step 2: Start your Application
-
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
-
-### For Android
-
-```bash
-# using npm
-npm run android
-
-# OR using Yarn
 yarn android
-```
-
-### For iOS
-
-```bash
-# using npm
-npm run ios
-
-# OR using Yarn
 yarn ios
 ```
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+## Quality Workflow
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+```bash
+yarn lint
+yarn typecheck
+yarn test:ci
+yarn validate
+```
 
-## Step 3: Modifying your App
+## Repo Operating System
 
-Now that you have successfully run the app, let's modify it.
+- `AGENTS.md`: rules for AI coding agents working in this repo
+- `CONTRIBUTING.md`: contributor workflow and quality expectations
+- `docs/ai-workflow.md`: recommended AI delivery loop for this project
+- `.github/workflows/quality.yml`: CI quality gate for pull requests and key branches
+- `.husky/pre-commit` and `.husky/pre-push`: local guardrails
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+## Architecture Notes
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
+- `src/screens`: screen-level flows
+- `src/components`: reusable UI and feature components
+- `src/navigators`: navigation structure
+- `src/hooks`: shared hooks like theming and navigation behavior
+- `src/libs`: external service integrations
+- `src/constants`: design tokens and shared app constants
 
-## Congratulations! :tada:
+## Current Standard
 
-You've successfully run and modified your React Native App. :partying_face:
+This repo is being hardened incrementally:
 
-### Now what?
+- Linting is scoped to active app and test sources
+- Type checking is enabled as a migration guardrail instead of pretending the whole legacy surface is fully strict today
+- Native call integrations are mocked in Jest so the validation loop stays reliable
+- Pull requests, issues, and AI instructions are documented for team scale
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
+## Next Product-Grade Moves
 
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+- Expand component and navigation test coverage around critical user journeys
+- Tighten TypeScript from incremental mode toward full strictness
+- Add environment validation and release automation once secrets strategy is finalized
+- Separate domain data from presentational components for easier scaling

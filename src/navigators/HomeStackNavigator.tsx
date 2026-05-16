@@ -8,6 +8,14 @@ import {
   Notification,
   ProductDetails,
   SearchProduct,
+  SnapshotChat,
+  SnapshotInbox,
+  SnapshotOffer,
+  SnapshotPayment,
+  SnapshotPin,
+  SnapshotReview,
+  SnapshotShipping,
+  SnapshotSuccess,
   SpecialOffer,
   TopDeals,
   WishList,
@@ -24,6 +32,23 @@ const HomeStackNavigator = () => {
       <Stack.Screen name={ROUTES.TOP_DEALS} component={TopDeals} />
       <Stack.Screen name={ROUTES.SPECIAL_OFFER} component={SpecialOffer} />
       <Stack.Screen name={ROUTES.PRODUCT_DETAILS} component={ProductDetails} />
+      <Stack.Screen name={ROUTES.SNAPSHOT_INBOX} component={SnapshotInbox} />
+      <Stack.Screen name={ROUTES.SNAPSHOT_CHAT} component={SnapshotChat} />
+      <Stack.Screen name={ROUTES.SNAPSHOT_OFFER} component={SnapshotOffer} />
+      <Stack.Screen
+        name={ROUTES.SNAPSHOT_SHIPPING}
+        component={SnapshotShipping}
+      />
+      <Stack.Screen
+        name={ROUTES.SNAPSHOT_PAYMENT}
+        component={SnapshotPayment}
+      />
+      <Stack.Screen name={ROUTES.SNAPSHOT_REVIEW} component={SnapshotReview} />
+      <Stack.Screen name={ROUTES.SNAPSHOT_PIN} component={SnapshotPin} />
+      <Stack.Screen
+        name={ROUTES.SNAPSHOT_SUCCESS}
+        component={SnapshotSuccess}
+      />
       <Stack.Screen name={ROUTES.CHAT} component={Chat} />
       <Stack.Screen name={ROUTES.CALL} component={Call} />
       <Stack.Group

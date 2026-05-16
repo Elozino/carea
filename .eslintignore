@@ -1,0 +1,5 @@
+bin.js
+coverage
+android/app/build
+ios/build
+vendor

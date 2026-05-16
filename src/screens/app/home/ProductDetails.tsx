@@ -173,7 +173,15 @@ const ProductDetails = () => {
               </Text>
             </View>
             <View>
-              <Button text="Make an Offer" />
+              <Button
+                text="Join Live Auction"
+                onPress={() =>
+                  navigate(ROUTES.SNAPSHOT_INBOX, {
+                    productName: 'BMW M4 Series',
+                    price: '$175,000',
+                  })
+                }
+              />
             </View>
           </View>
         </View>
