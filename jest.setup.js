@@ -42,7 +42,8 @@ jest.mock('expo-blur', () => {
 
   return {
     __esModule: true,
-    BlurView: ({children, ...props}) => React.createElement(View, props, children),
+    BlurView: ({children, ...props}) =>
+      React.createElement(View, props, children),
   };
 });
 
