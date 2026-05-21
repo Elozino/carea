@@ -55,6 +55,16 @@ jest.mock('expo-haptics', () => ({
   },
 }));
 
+jest.mock('react-native-encrypted-storage', () => ({
+  __esModule: true,
+  default: {
+    setItem: jest.fn().mockResolvedValue(undefined),
+    getItem: jest.fn().mockResolvedValue(null),
+    removeItem: jest.fn().mockResolvedValue(undefined),
+    clear: jest.fn().mockResolvedValue(undefined),
+  },
+}));
+
 jest.mock('react-native-gifted-chat', () => {
   const React = require('react');
   const {View} = require('react-native');
