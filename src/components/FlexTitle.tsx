@@ -9,7 +9,7 @@ interface IFlexTitle {
   onPress: () => void;
 }
 
-const FlexTitle = ({title, btnTitle, onPress, icon}: IFlexTitle) => {
+const FlexTitle = ({title, btnTitle, onPress}: IFlexTitle) => {
   const theme = useCareaTheme();
   return (
     <View style={styles.wrapper}>

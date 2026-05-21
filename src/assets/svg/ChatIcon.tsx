@@ -1,7 +1,7 @@
 import * as React from 'react';
-import Svg, {Path} from 'react-native-svg';
+import Svg, {Path, SvgProps} from 'react-native-svg';
 
-const ChatIcon = props => (
+const ChatIcon = (props: SvgProps) => (
   <Svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"

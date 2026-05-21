@@ -1,35 +1,42 @@
 import {DefaultTheme, NavigationContainer} from '@react-navigation/native';
 import {ZegoCallInvitationDialog} from '@zegocloud/zego-uikit-prebuilt-call-rn';
 import React from 'react';
-import {Appearance, StatusBar} from 'react-native';
+import {StatusBar} from 'react-native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {globalStyle} from './src/constants/styles';
 import useCareaTheme from './src/hooks/useCareaTheme';
+import linking from './src/navigators/linking';
 import RootStackNavigator from './src/navigators/RootStackNavigator';
 
 const App = () => {
   const theme = useCareaTheme();
   const MyTheme = {
     ...DefaultTheme,
+    dark: theme.isDark,
     colors: {
       ...DefaultTheme.colors,
-      background: theme.bg_1,
+      primary: theme.navigation.primary,
+      background: theme.navigation.background,
+      card: theme.navigation.card,
+      text: theme.navigation.text,
+      border: theme.navigation.border,
+      notification: theme.navigation.notification,
     },
   };
   return (
     <>
-      <GestureHandlerRootView style={globalStyle.container}>
+      <GestureHandlerRootView
+        style={[
+          globalStyle.container,
+          {backgroundColor: theme.background.app},
+        ]}>
         <SafeAreaProvider>
           <StatusBar
-            barStyle={
-              Appearance.getColorScheme() === 'light'
-                ? 'dark-content'
-                : 'light-content'
-            }
-            backgroundColor={theme.bg_1}
+            barStyle={theme.statusBarStyle}
+            backgroundColor={theme.background.app}
           />
-          <NavigationContainer theme={MyTheme}>
+          <NavigationContainer linking={linking} theme={MyTheme}>
             <ZegoCallInvitationDialog />
             <RootStackNavigator />
           </NavigationContainer>

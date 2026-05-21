@@ -6,7 +6,13 @@ import {paddingSizes, textSizes} from '../constants/styles';
 import useCareaTheme from '../hooks/useCareaTheme';
 import * as Haptics from 'expo-haptics';
 
-const ChatBox = ({value, onChangeText, submitHandler}) => {
+interface ChatBoxProps {
+  value: string;
+  onChangeText: (text: string) => void;
+  submitHandler: () => void;
+}
+
+const ChatBox = ({value, onChangeText, submitHandler}: ChatBoxProps) => {
   const theme = useCareaTheme();
 
   return (
@@ -59,10 +65,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'green',
     paddingHorizontal: paddingSizes.small,
+    height: 48,
     borderRadius: textSizes.small,
   },
   textInputContainer: {
     flex: 1,
+    paddingVertical: 0,
   },
   micIconWrapper: {
     borderRadius: 100,

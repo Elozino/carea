@@ -1,6 +1,6 @@
 import * as React from 'react';
-import Svg, {G, Path} from 'react-native-svg';
-const SendIcon = props => (
+import Svg, {G, Path, SvgProps} from 'react-native-svg';
+const SendIcon = (props: SvgProps) => (
   <Svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"

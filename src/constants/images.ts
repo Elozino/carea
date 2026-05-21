@@ -6,4 +6,5 @@ interface Images {
 
 export const IMAGES: Images = {
   onboarding: require('../assets/images/onboarding1.jpg'),
+  car: require('../assets/images/car.png'),
 };

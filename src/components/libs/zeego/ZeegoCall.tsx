@@ -1,31 +1,35 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {View, StyleSheet, Image, Text} from 'react-native';
+import {Image, StyleSheet, Text, View} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 import {
-  ZegoUIKitPrebuiltCall,
   ONE_ON_ONE_VOICE_CALL_CONFIG,
+  ZegoUIKitPrebuiltCall,
 } from '@zegocloud/zego-uikit-prebuilt-call-rn';
 import {zegoConfig} from './data';
-import {useNavigation} from '@react-navigation/native';
+
+type ForegroundProps = {
+  userInfo: unknown;
+};
 
 export default function VoiceCallPage() {
   const {goBack} = useNavigation();
+
   return (
     <View style={styles.container}>
       <ZegoUIKitPrebuiltCall
         appID={zegoConfig.appID}
         appSign={zegoConfig.appSign}
-        userID={'zino'} // userID can be something like a phone number or the user id on your own user system.
+        userID={'zino'}
         userName={'elozino'}
-        callID={'12345'} // callID can be any unique string.
+        callID={'12345'}
         config={{
-          // You can also use ONE_ON_ONE_VOICE_CALL_CONFIG/GROUP_VIDEO_CALL_CONFIG/GROUP_VOICE_CALL_CONFIG to make more types of calls.
           ...ONE_ON_ONE_VOICE_CALL_CONFIG,
           ringtoneConfig: {
             incomingCallFileName: 'ring_tone.mp3',
             outgoingCallFileName: 'ring_tone.mp3',
           },
-          onCallEnd: (callID, reason, duration) => {
+          onCallEnd: (callID: string, reason: string, duration: number) => {
             console.log('duration: ', duration);
             console.log('reason: ', reason);
             console.log('callID: ', callID);
@@ -37,9 +41,8 @@ export default function VoiceCallPage() {
           onHangUp: () => {
             goBack();
           },
-          //\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
           audioVideoViewConfig: {
-            foregroundBuilder: ({userInfo}) => (
+            foregroundBuilder: ({userInfo}: ForegroundProps) => (
               <MyForeground userInfo={userInfo} />
             ),
           },
@@ -70,7 +73,7 @@ export const avatar = () => {
   );
 };
 
-export const MyForeground = ({userInfo}) => {
+export const MyForeground = ({userInfo}: ForegroundProps) => {
   console.log('userInfo: ', userInfo);
   return <Text> I avatar </Text>;
 };

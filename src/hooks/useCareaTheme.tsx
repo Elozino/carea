@@ -1,28 +1,10 @@
-import {useLayoutEffect, useState} from 'react';
-import {Appearance, ColorSchemeName} from 'react-native';
-import {COLORS} from '../constants/colors';
+import {useColorScheme} from 'react-native';
+import {CareaTheme, getCareaTheme} from '../constants/styles';
 
-const useCareaTheme = () => {
-  const [theme, setTheme] = useState<ColorSchemeName>(
-    Appearance.getColorScheme() ?? 'light',
-  );
+const useCareaTheme = (): CareaTheme => {
+  const colorScheme = useColorScheme();
 
-  useLayoutEffect(() => {
-    const subscription = Appearance.addChangeListener(handleAppearanceChange);
-    return () => {
-      subscription.remove();
-    };
-  }, []);
-
-  const handleAppearanceChange = ({
-    colorScheme,
-  }: {
-    colorScheme: ColorSchemeName;
-  }) => {
-    setTheme(colorScheme === 'dark' ? 'dark' : 'light');
-  };
-
-  return theme === 'dark' ? COLORS.dark : COLORS.light;
+  return getCareaTheme(colorScheme);
 };
 
 export default useCareaTheme;

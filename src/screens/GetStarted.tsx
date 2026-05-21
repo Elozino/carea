@@ -1,11 +1,16 @@
-/* eslint-disable react-native/no-inline-styles */
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import React, {useState} from 'react';
-import {Appearance, StatusBar, StyleSheet, Text, View} from 'react-native';
+import {StatusBar, StyleSheet, Text, View} from 'react-native';
 import {Button} from '../components/ui/Button';
 import {ROUTES} from '../constants/enums';
-import {getFontSize, globalStyle, paddingSizes} from '../constants/styles';
+import {
+  globalStyle,
+  opacityLevels,
+  paddingSizes,
+  radiusSizes,
+  textSizes,
+} from '../constants/styles';
 import useCareaTheme from '../hooks/useCareaTheme';
 import {AuthStackParams} from '../types/navigation';
 
@@ -16,18 +21,15 @@ const GetStarted = () => {
     useNavigation<NativeStackNavigationProp<AuthStackParams>>();
 
   return (
-    <View style={[{backgroundColor: theme.bg_1}, globalStyle.container]}>
+    <View
+      style={[globalStyle.container, {backgroundColor: theme.background.app}]}>
       <StatusBar
-        barStyle={
-          Appearance.getColorScheme() === 'light'
-            ? 'dark-content'
-            : 'light-content'
-        }
-        backgroundColor={theme.bg_1}
+        barStyle={theme.statusBarStyle}
+        backgroundColor={theme.background.app}
       />
       <View style={[styles.showcase]} />
       <View style={[styles.getStarted]}>
-        <Text style={[styles.getStartedText, {color: theme.text_1}]}>
+        <Text style={[styles.getStartedText, {color: theme.text.primary}]}>
           The best car in your hands with Carea
         </Text>
         <View style={[styles.dotWrapper]}>
@@ -37,8 +39,15 @@ const GetStarted = () => {
               <View
                 style={[
                   {
-                    backgroundColor: theme.btn_bg,
-                    width: index === activeIndex ? 30 : 10,
+                    backgroundColor: theme.action.primaryBackground,
+                    opacity:
+                      index === activeIndex
+                        ? opacityLevels.strong
+                        : opacityLevels.faint,
+                    width:
+                      index === activeIndex
+                        ? Number(paddingSizes.large)
+                        : Number(paddingSizes.small),
                   },
                   styles.dot,
                 ]}
@@ -72,7 +81,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   getStartedText: {
-    fontSize: getFontSize(32),
+    fontSize: textSizes.large_1,
     textAlign: 'center',
     fontWeight: '500',
   },
@@ -80,10 +89,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    gap: 5,
+    gap: paddingSizes.xSmall,
   },
   dot: {
-    height: 10,
-    borderRadius: 100,
+    height: paddingSizes.small,
+    borderRadius: radiusSizes.pill,
   },
 });

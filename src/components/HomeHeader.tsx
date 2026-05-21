@@ -5,7 +5,12 @@ import {LikeIcon, NotificationIcon} from '../assets/svg';
 import {paddingSizes, textSizes} from '../constants/styles';
 import useCareaTheme from '../hooks/useCareaTheme';
 
-const HomeHeader = ({notificationAction, likeAction}) => {
+interface HomeHeaderProps {
+  notificationAction: () => void;
+  likeAction: () => void;
+}
+
+const HomeHeader = ({notificationAction, likeAction}: HomeHeaderProps) => {
   const theme = useCareaTheme();
   return (
     <View style={[styles.headerWrapper, styles.wrapper]}>

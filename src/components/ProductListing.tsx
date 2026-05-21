@@ -5,7 +5,11 @@ import {paddingSizes, textSizes} from '../constants/styles';
 import {LikeIcon} from '../assets/svg';
 import useCareaTheme from '../hooks/useCareaTheme';
 
-const ProductListing = () => {
+interface ProductListingProps {
+  item?: unknown;
+}
+
+const ProductListing = (_props: ProductListingProps) => {
   const theme = useCareaTheme();
   return (
     <View style={{width: '48%'}}>

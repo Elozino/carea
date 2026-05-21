@@ -14,7 +14,11 @@ import OrderCard from './OrderCard';
 import AppTextInput from './ui/AppTextInput';
 import {Button} from './ui/Button';
 
-const LeaveAReview = ({closeModal}) => {
+type LeaveAReviewProps = {
+  closeModal: () => void;
+};
+
+const LeaveAReview = ({closeModal}: LeaveAReviewProps) => {
   const theme = useCareaTheme();
   return (
     <View
