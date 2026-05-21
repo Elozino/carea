@@ -20,6 +20,8 @@ import XIcon from './XIcon';
 import RecordStackIcon from './RecordStackIcon';
 import GalleryIcon from './GalleryIcon';
 import MicIcon from './MicIcon';
+import EyeOpenIcon from './EyeOpenIcon';
+import EyeOffIcon from './EyeOffIcon';
 
 export {
   GoogleIcon,
@@ -44,4 +46,6 @@ export {
   RecordStackIcon,
   GalleryIcon,
   MicIcon,
+  EyeOpenIcon,
+  EyeOffIcon,
 };

@@ -69,3 +69,30 @@ export interface RequestConfig extends Omit<RequestInit, 'method' | 'body'> {
   /** Per-request timeout in milliseconds. Defaults to 15 000. */
   timeout?: number;
 }
+
+/**
+ * Returns the best user-facing message for unknown request errors.
+ * Prefers backend-provided messages and falls back only when unavailable.
+ */
+export function getApiErrorMessage(error: unknown, fallback: string): string {
+  if (error instanceof ApiError) {
+    return error.message || fallback;
+  }
+
+  if (error instanceof Error) {
+    return error.message || fallback;
+  }
+
+  if (
+    error &&
+    typeof error === 'object' &&
+    'message' in error &&
+    typeof (error as {message?: unknown}).message === 'string'
+  ) {
+    return (
+      ((error as {message: string}).message || fallback).trim() || fallback
+    );
+  }
+
+  return fallback;
+}

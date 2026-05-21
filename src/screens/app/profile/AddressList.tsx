@@ -47,7 +47,7 @@ const AddressList = () => {
                 <Text style={{color: theme.text_3}}>✏️</Text>
               </Pressable>
               <Pressable style={styles.iconBtn}>
-                <Text style={{color: '#EF4444'}}>🗑</Text>
+                <Text style={styles.deleteIconText}>🗑</Text>
               </Pressable>
             </View>
           </View>
@@ -106,6 +106,9 @@ const styles = StyleSheet.create({
   },
   iconBtn: {
     padding: 6,
+  },
+  deleteIconText: {
+    color: '#EF4444',
   },
   btnWrap: {
     marginTop: 32,

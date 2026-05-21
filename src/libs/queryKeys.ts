@@ -49,8 +49,7 @@ export const queryKeys = {
   // ------------------------------------------------------------------
   profile: {
     all: ['profile'] as const,
-    detail: (userId: string | number) =>
-      ['profile', 'detail', userId] as const,
+    detail: (userId: string | number) => ['profile', 'detail', userId] as const,
   },
 
   // ------------------------------------------------------------------

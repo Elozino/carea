@@ -12,7 +12,6 @@ import {
 } from '../../assets/svg';
 import {AppTextInput} from '../../components';
 import SafeInset from '../../components/layout/SafeInset';
-import Topbar from '../../components/Topbar';
 import {Button} from '../../components/ui/Button';
 import {ROUTES} from '../../constants/enums';
 import {globalStyle, paddingSizes} from '../../constants/styles';
@@ -23,13 +22,18 @@ const ProfileForm = () => {
   const theme = useCareaTheme();
   const {goBack, navigate} =
     useNavigation<NativeStackNavigationProp<AuthStackParams>>();
+
+  const handleBack = React.useCallback(() => {
+    goBack();
+  }, [goBack]);
+
   return (
-    <SafeInset>
-      <Topbar
-        leftIconAction={goBack}
-        text="Profile"
-        leftIcon={<ArrowLeftIcon fill={theme?.btn_bg} width={40} />}
-      />
+    <SafeInset
+      header={{
+        title: 'Profile',
+        leftIcon: <ArrowLeftIcon fill={theme.text_1} width={24} height={24} />,
+        onLeftPress: handleBack,
+      }}>
       <ScrollView>
         <KeyboardAvoidingView
           style={[

@@ -24,6 +24,9 @@ const SettingsRow = ({
   dangerous = false,
 }: SettingsRowProps) => {
   const theme = useCareaTheme();
+  const labelColorStyle = {
+    color: dangerous ? '#FF4444' : theme.text_1,
+  };
 
   return (
     <Pressable
@@ -33,7 +36,7 @@ const SettingsRow = ({
       <Text
         style={[
           styles.label,
-          {color: dangerous ? '#FF4444' : theme.text_1},
+          labelColorStyle,
           !leftIcon && styles.labelNoIcon,
         ]}>
         {label}

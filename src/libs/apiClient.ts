@@ -28,7 +28,8 @@ import {
  * and swap the fallback string for the real value.
  */
 const BASE_URL: string =
-  (typeof process !== 'undefined' && process.env?.CAREA_API_BASE_URL) || '';
+  (typeof process !== 'undefined' && process.env?.CAREA_API_BASE_URL) ||
+  'http://localhost:8000/api/v1';
 
 const DEFAULT_TIMEOUT_MS = 15_000;
 
@@ -80,6 +81,51 @@ export async function clearTokens(): Promise<void> {
 
 let refreshPromise: Promise<string> | null = null;
 
+type RefreshTokenPayload = {
+  accessToken: string;
+  refreshToken?: string;
+};
+
+function extractRefreshTokens(body: unknown): RefreshTokenPayload | null {
+  if (!body || typeof body !== 'object') {
+    return null;
+  }
+
+  const direct = body as {
+    accessToken?: unknown;
+    refreshToken?: unknown;
+    data?: unknown;
+  };
+
+  if (typeof direct.accessToken === 'string') {
+    return {
+      accessToken: direct.accessToken,
+      refreshToken:
+        typeof direct.refreshToken === 'string'
+          ? direct.refreshToken
+          : undefined,
+    };
+  }
+
+  if (direct.data && typeof direct.data === 'object') {
+    const nested = direct.data as {
+      accessToken?: unknown;
+      refreshToken?: unknown;
+    };
+    if (typeof nested.accessToken === 'string') {
+      return {
+        accessToken: nested.accessToken,
+        refreshToken:
+          typeof nested.refreshToken === 'string'
+            ? nested.refreshToken
+            : undefined,
+      };
+    }
+  }
+
+  return null;
+}
+
 async function refreshAccessToken(): Promise<string> {
   const refreshToken = await EncryptedStorage.getItem(REFRESH_TOKEN_KEY);
   if (!refreshToken) {
@@ -99,17 +145,18 @@ async function refreshAccessToken(): Promise<string> {
   }
 
   const body = await response.json();
-  const newAccessToken: string = body.accessToken ?? body.access_token;
-  await EncryptedStorage.setItem(ACCESS_TOKEN_KEY, newAccessToken);
+  const tokens = extractRefreshTokens(body);
 
-  if (body.refreshToken ?? body.refresh_token) {
-    await EncryptedStorage.setItem(
-      REFRESH_TOKEN_KEY,
-      body.refreshToken ?? body.refresh_token,
-    );
+  if (!tokens) {
+    throw new ApiError(500, 'Invalid refresh token response from server.');
   }
 
-  return newAccessToken;
+  await EncryptedStorage.setItem(ACCESS_TOKEN_KEY, tokens.accessToken);
+  if (tokens.refreshToken) {
+    await EncryptedStorage.setItem(REFRESH_TOKEN_KEY, tokens.refreshToken);
+  }
+
+  return tokens.accessToken;
 }
 
 // ---------------------------------------------------------------------------

@@ -19,6 +19,9 @@ const TransactionRow = ({
   imageKey,
 }: TransactionRowProps) => {
   const theme = useCareaTheme();
+  const amountColorStyle = {
+    color: isCredit ? '#22C55E' : '#EF4444',
+  };
 
   return (
     <View style={[styles.row, {borderBottomColor: theme.bg_2}]}>
@@ -33,7 +36,7 @@ const TransactionRow = ({
         <Text style={[styles.label, {color: theme.text_1}]}>{label}</Text>
         <Text style={[styles.sub, {color: theme.text_3}]}>{subLabel}</Text>
       </View>
-      <Text style={[styles.amount, {color: isCredit ? '#22C55E' : '#EF4444'}]}>
+      <Text style={[styles.amount, amountColorStyle]}>
         {isCredit ? '+' : '-'}
         {amount}
       </Text>

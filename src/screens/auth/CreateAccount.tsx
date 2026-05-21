@@ -12,6 +12,7 @@ import {
   View,
 } from 'react-native';
 import {
+  ArrowLeftIcon,
   AvatarIcon,
   EmailIcon,
   PadlockIcon,
@@ -23,11 +24,21 @@ import {Button} from '../../components/ui/Button';
 import {ROUTES} from '../../constants/enums';
 import {getFontSize, paddingSizes} from '../../constants/styles';
 import useCareaTheme from '../../hooks/useCareaTheme';
+import {
+  sanitizeSignupPayload,
+  useSignupMutation,
+  validateEmail,
+  validateName,
+  validatePasswordForSignup,
+  validatePhone,
+  validateSignupForm,
+} from '../../modules/auth';
+import {getApiErrorMessage} from '../../types/api';
 import {AuthStackParams} from '../../types/navigation';
 
 const CreateAccount = () => {
   const theme = useCareaTheme();
-  const {navigate} =
+  const {goBack, navigate} =
     useNavigation<NativeStackNavigationProp<AuthStackParams>>();
   const themedStyles = createThemedStyles(theme);
   const iconProps = createIconProps(theme);
@@ -38,13 +49,69 @@ const CreateAccount = () => {
     lastName: '',
     phone: '',
   });
+  const [formError, setFormError] = React.useState<string | null>(null);
+
+  const signupMutation = useSignupMutation({
+    onSuccess: () => {
+      navigate(ROUTES.PROFILE_FORM);
+    },
+  });
 
   const updateField = (field: keyof typeof form) => (value: string) => {
     setForm(current => ({...current, [field]: value}));
   };
 
+  const firstNameError = validateName('First name', form.firstName);
+  const lastNameError = validateName('Last name', form.lastName);
+  const emailError = validateEmail(form.email);
+  const phoneError = validatePhone(form.phone);
+  const passwordError = validatePasswordForSignup(form.password);
+  const hasRequiredFields =
+    !firstNameError &&
+    !lastNameError &&
+    !emailError &&
+    !phoneError &&
+    !passwordError;
+
+  const errorMessage = React.useMemo(() => {
+    if (formError) {
+      return formError;
+    }
+
+    const {error} = signupMutation;
+    if (!error) {
+      return null;
+    }
+
+    return getApiErrorMessage(
+      error,
+      'Unable to create your account right now. Please try again.',
+    );
+  }, [formError, signupMutation]);
+
+  const handleSignUp = () => {
+    setFormError(null);
+
+    const validationErrors = validateSignupForm(form);
+    if (validationErrors.length > 0) {
+      setFormError(validationErrors[0]);
+      return;
+    }
+
+    signupMutation.mutate(sanitizeSignupPayload(form));
+  };
+
+  const handleBack = React.useCallback(() => {
+    goBack();
+  }, [goBack]);
+
   return (
-    <SafeInset style={themedStyles.wrapper}>
+    <SafeInset
+      style={themedStyles.wrapper}
+      header={{
+        leftIcon: <ArrowLeftIcon fill={theme.text_1} width={24} height={24} />,
+        onLeftPress: handleBack,
+      }}>
       <KeyboardAvoidingView
         style={styles.keyboardAwareWrapper}
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
@@ -120,9 +187,22 @@ const CreateAccount = () => {
                 returnKeyType="done"
               />
               <View style={styles.formSpacing} />
+              {errorMessage ? (
+                <Text
+                  style={[
+                    styles.errorText,
+                    {color: theme.navigation.notification},
+                  ]}>
+                  {errorMessage}
+                </Text>
+              ) : null}
               <Button
-                text={'Sign up'}
-                onPress={() => navigate(ROUTES.PROFILE_FORM)}
+                text={
+                  signupMutation.isPending ? 'Creating account...' : 'Sign up'
+                }
+                onPress={handleSignUp}
+                loading={signupMutation.isPending}
+                disabled={!hasRequiredFields}
               />
             </View>
             <View style={styles.accWrapper}>
@@ -203,6 +283,9 @@ const styles = StyleSheet.create({
   },
   formSpacing: {
     marginTop: paddingSizes.small,
+  },
+  errorText: {
+    marginBottom: paddingSizes.small,
   },
   accWrapper: {
     flexDirection: 'row',

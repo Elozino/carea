@@ -2,6 +2,7 @@
 import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {Button} from '../../components/ui/Button';
+import SafeInset from '../../components/layout/SafeInset';
 import {paddingSizes, textSizes} from '../../constants/styles';
 import useCareaTheme from '../../hooks/useCareaTheme';
 import {AppleIcon, FacebookIcon, GoogleIcon} from '../../assets/svg';
@@ -14,8 +15,9 @@ const Auth = () => {
   const theme = useCareaTheme();
   const {navigate} =
     useNavigation<NativeStackNavigationProp<AuthStackParams>>();
+
   return (
-    <View style={[styles.wrapper, {backgroundColor: theme.bg_1}]}>
+    <SafeInset style={[styles.wrapper, {backgroundColor: theme.bg_1}]}>
       <View style={[styles.authWrapper]}>
         <View style={[styles.imageWrapper]}>
           <Image
@@ -78,7 +80,7 @@ const Auth = () => {
           </Pressable>
         </View>
       </View>
-    </View>
+    </SafeInset>
   );
 };
 
