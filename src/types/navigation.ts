@@ -27,9 +27,13 @@ export type AuthStackParams = {
   WELCOME: undefined;
   AUTH: undefined;
   LOGIN: undefined;
+  FORGOT_PASSWORD: undefined;
+  RESET_PASSWORD: {email: string};
   CREATE_ACCOUNT: undefined;
   PROFILE_FORM: undefined;
   APP: undefined;
+  ZegoUIKitPrebuiltCallWaitingScreen: undefined;
+  ZegoUIKitPrebuiltCallInCallScreen: undefined;
 };
 
 export type HomeStackParams = {

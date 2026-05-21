@@ -37,18 +37,14 @@ const PaymentMethodRow = ({
   onPress,
 }: PaymentMethodRowProps) => {
   const theme = useCareaTheme();
+  const rowStyle = {
+    backgroundColor: theme.bg_1,
+    borderColor: isSelected ? theme.btn_bg : theme.bg_2,
+    borderWidth: isSelected ? 2 : StyleSheet.hairlineWidth,
+  };
 
   return (
-    <Pressable
-      style={[
-        styles.row,
-        {
-          backgroundColor: theme.bg_1,
-          borderColor: isSelected ? theme.btn_bg : theme.bg_2,
-          borderWidth: isSelected ? 2 : StyleSheet.hairlineWidth,
-        },
-      ]}
-      onPress={onPress}>
+    <Pressable style={[styles.row, rowStyle]} onPress={onPress}>
       <View style={[styles.logo, {backgroundColor: METHOD_COLOR[method]}]}>
         <Text style={styles.logoText}>{METHOD_LABEL[method]}</Text>
       </View>

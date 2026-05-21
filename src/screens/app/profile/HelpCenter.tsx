@@ -34,6 +34,9 @@ const HelpCenter = () => {
 
   const toggleFaq = (id: string) =>
     setExpanded(prev => (prev === id ? null : id));
+  const activeTabStyle = {
+    borderBottomColor: theme.btn_bg,
+  };
 
   return (
     <SafeInset>
@@ -56,10 +59,8 @@ const HelpCenter = () => {
             key={tab}
             style={[
               styles.tab,
-              activeTab === tab && {
-                borderBottomColor: theme.btn_bg,
-                borderBottomWidth: 2,
-              },
+              activeTab === tab && styles.activeTab,
+              activeTab === tab && activeTabStyle,
             ]}
             onPress={() => setActiveTab(tab)}>
             <Text
@@ -122,8 +123,11 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     paddingVertical: 12,
-    borderBottomWidth: 2,
+    borderBottomWidth: 0,
     borderBottomColor: 'transparent',
+  },
+  activeTab: {
+    borderBottomWidth: 2,
   },
   tabText: {
     fontSize: 14,

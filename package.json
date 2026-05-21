@@ -29,6 +29,7 @@
     "@react-navigation/native-stack": "^6.11.0",
     "@react-three/drei": "^9.96.1",
     "@react-three/fiber": "^8.15.14",
+    "@tanstack/react-query": "^5.100.11",
     "@zegocloud/zego-uikit-prebuilt-call-rn": "^5.10.2",
     "@zegocloud/zego-uikit-rn": "^2.14.3",
     "expo": "^50.0.2",

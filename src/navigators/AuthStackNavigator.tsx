@@ -3,9 +3,11 @@ import React from 'react';
 import {
   Auth,
   CreateAccount,
+  ForgotPassword,
   GetStarted,
   Login,
   ProfileForm,
+  ResetPassword,
   Welcome,
 } from '../screens';
 import BottomNavigator from './BottomNavigator';
@@ -14,12 +16,18 @@ import {
   ZegoUIKitPrebuiltCallInCallScreen,
   ZegoUIKitPrebuiltCallWaitingScreen,
 } from '@zegocloud/zego-uikit-prebuilt-call-rn';
+import {AuthStackParams} from '../types/navigation';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<AuthStackParams>();
 
-const AuthStackNavigator = () => {
+type AuthStackNavigatorProps = {
+  initialRouteName?: keyof AuthStackParams;
+};
+
+const AuthStackNavigator = ({initialRouteName}: AuthStackNavigatorProps) => {
   return (
     <Stack.Navigator
+      initialRouteName={initialRouteName}
       screenOptions={{
         headerShown: false,
       }}>
@@ -27,6 +35,8 @@ const AuthStackNavigator = () => {
       <Stack.Screen name={ROUTES.GET_STARTED} component={GetStarted} />
       <Stack.Screen name={ROUTES.AUTH} component={Auth} />
       <Stack.Screen name={ROUTES.LOGIN} component={Login} />
+      <Stack.Screen name={ROUTES.FORGOT_PASSWORD} component={ForgotPassword} />
+      <Stack.Screen name={ROUTES.RESET_PASSWORD} component={ResetPassword} />
       <Stack.Screen name={ROUTES.CREATE_ACCOUNT} component={CreateAccount} />
       <Stack.Screen name={ROUTES.PROFILE_FORM} component={ProfileForm} />
       <Stack.Screen name={ROUTES.APP} component={BottomNavigator} />

@@ -3,7 +3,6 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import React, {useState} from 'react';
 import {StatusBar, StyleSheet, Text, View} from 'react-native';
 import {Button} from '../components/ui/Button';
-import {ROUTES} from '../constants/enums';
 import {
   globalStyle,
   opacityLevels,
@@ -12,13 +11,31 @@ import {
   textSizes,
 } from '../constants/styles';
 import useCareaTheme from '../hooks/useCareaTheme';
+import {resolveAuthEntryRoute} from '../modules/auth';
 import {AuthStackParams} from '../types/navigation';
 
 const GetStarted = () => {
   const theme = useCareaTheme();
   const [activeIndex, setActiveIndex] = useState<number>(0);
+  const [isResolvingAuthRoute, setIsResolvingAuthRoute] = useState(false);
   const {navigate} =
     useNavigation<NativeStackNavigationProp<AuthStackParams>>();
+
+  const handlePrimaryAction = async () => {
+    if (activeIndex <= 1) {
+      setActiveIndex(prev => prev + 1);
+      return;
+    }
+
+    if (isResolvingAuthRoute) {
+      return;
+    }
+
+    setIsResolvingAuthRoute(true);
+    const authRoute = await resolveAuthEntryRoute();
+    navigate(authRoute);
+    setIsResolvingAuthRoute(false);
+  };
 
   return (
     <View
@@ -56,12 +73,15 @@ const GetStarted = () => {
             ))}
         </View>
         <Button
-          text={activeIndex <= 1 ? 'Next' : 'Get Started'}
-          onPress={() =>
+          text={
             activeIndex <= 1
-              ? setActiveIndex(prev => prev + 1)
-              : navigate(ROUTES.AUTH)
+              ? 'Next'
+              : isResolvingAuthRoute
+              ? 'Please wait...'
+              : 'Get Started'
           }
+          onPress={handlePrimaryAction}
+          disabled={isResolvingAuthRoute}
         />
       </View>
     </View>

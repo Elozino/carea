@@ -12,6 +12,10 @@ type ForegroundProps = {
   userInfo: unknown;
 };
 
+const foregroundBuilder = ({userInfo}: ForegroundProps) => (
+  <MyForeground userInfo={userInfo} />
+);
+
 export default function VoiceCallPage() {
   const {goBack} = useNavigation();
 
@@ -42,9 +46,7 @@ export default function VoiceCallPage() {
             goBack();
           },
           audioVideoViewConfig: {
-            foregroundBuilder: ({userInfo}: ForegroundProps) => (
-              <MyForeground userInfo={userInfo} />
-            ),
+            foregroundBuilder,
           },
           avatarBuilder: avatar,
           notifyWhenAppRunningInBackgroundOrQuit: true,

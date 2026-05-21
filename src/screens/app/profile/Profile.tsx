@@ -12,6 +12,7 @@ import {ROUTES} from '../../../constants/enums';
 import {ProfileStackParams} from '../../../types/navigation';
 import {MOCK_USER} from './profileMockData';
 import {getFontSize} from '../../../constants/styles';
+import {useLogoutMutation} from '../../../modules/auth';
 
 type Nav = NativeStackNavigationProp<ProfileStackParams>;
 
@@ -19,6 +20,18 @@ const Profile = () => {
   const theme = useCareaTheme();
   const navigation = useNavigation<Nav>();
   const [logoutVisible, setLogoutVisible] = useState(false);
+  const logoutMutation = useLogoutMutation();
+
+  const resetToAuth = React.useCallback(() => {
+    setLogoutVisible(false);
+    navigation
+      .getParent()
+      ?.getParent()
+      ?.reset({
+        index: 0,
+        routes: [{name: ROUTES.AUTH}],
+      });
+  }, [navigation]);
 
   return (
     <SafeInset>
@@ -116,15 +129,16 @@ const Profile = () => {
               textStyle={{color: theme.btn_bg}}
             />
             <Button
-              text="Yes, Log out"
+              text={
+                logoutMutation.isPending ? 'Logging out...' : 'Yes, Log out'
+              }
               onPress={() => {
-                setLogoutVisible(false);
-                navigation
-                  .getParent()
-                  ?.getParent<NativeStackNavigationProp<any>>()
-                  ?.navigate('Auth');
+                logoutMutation.mutate(undefined, {
+                  onSettled: resetToAuth,
+                });
               }}
-              style={[styles.modalBtn, {backgroundColor: '#EF4444'}]}
+              style={[styles.modalBtn, styles.logoutBtn]}
+              loading={logoutMutation.isPending}
             />
           </View>
         </View>
@@ -200,6 +214,9 @@ const styles = StyleSheet.create({
   modalBtn: {
     flex: 1,
     borderRadius: getFontSize(30),
+  },
+  logoutBtn: {
+    backgroundColor: '#EF4444',
   },
   cancelBtn: {
     backgroundColor: 'transparent',

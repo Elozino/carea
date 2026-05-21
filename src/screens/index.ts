@@ -1,6 +1,8 @@
 import Welcome from './Welcome';
 import GetStarted from './GetStarted';
 import Login from './auth/Login';
+import ForgotPassword from './auth/ForgotPassword';
+import ResetPassword from './auth/ResetPassword';
 import CreateAccount from './auth/CreateAccount';
 import Auth from './auth/Auth';
 import ProfileForm from './auth/ProfileForm';
@@ -52,6 +54,8 @@ export {
   Welcome,
   GetStarted,
   Login,
+  ForgotPassword,
+  ResetPassword,
   CreateAccount,
   Auth,
   ProfileForm,

@@ -4,10 +4,12 @@ import React from 'react';
 import {StatusBar} from 'react-native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {QueryClientProvider} from '@tanstack/react-query';
 import {globalStyle} from './src/constants/styles';
 import useCareaTheme from './src/hooks/useCareaTheme';
 import linking from './src/navigators/linking';
 import RootStackNavigator from './src/navigators/RootStackNavigator';
+import {queryClient} from './src/libs/queryClient';
 
 const App = () => {
   const theme = useCareaTheme();
@@ -31,16 +33,18 @@ const App = () => {
           globalStyle.container,
           {backgroundColor: theme.background.app},
         ]}>
-        <SafeAreaProvider>
-          <StatusBar
-            barStyle={theme.statusBarStyle}
-            backgroundColor={theme.background.app}
-          />
-          <NavigationContainer linking={linking} theme={MyTheme}>
-            <ZegoCallInvitationDialog />
-            <RootStackNavigator />
-          </NavigationContainer>
-        </SafeAreaProvider>
+        <QueryClientProvider client={queryClient}>
+          <SafeAreaProvider>
+            <StatusBar
+              barStyle={theme.statusBarStyle}
+              backgroundColor={theme.background.app}
+            />
+            <NavigationContainer linking={linking} theme={MyTheme}>
+              <ZegoCallInvitationDialog />
+              <RootStackNavigator />
+            </NavigationContainer>
+          </SafeAreaProvider>
+        </QueryClientProvider>
       </GestureHandlerRootView>
     </>
   );

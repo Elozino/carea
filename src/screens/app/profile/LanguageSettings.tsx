@@ -37,24 +37,23 @@ const LanguageSettings = () => {
       <FlatList
         data={languages}
         keyExtractor={item => item.id}
-        renderItem={({item}) => (
-          <Pressable
-            style={[styles.row, {borderBottomColor: theme.bg_2}]}
-            onPress={() => select(item.id)}>
-            <Text style={[styles.label, {color: theme.text_1}]}>
-              {item.label}
-            </Text>
-            <View
-              style={[
-                styles.radio,
-                {
-                  borderColor: item.selected ? theme.btn_bg : theme.gray,
-                  backgroundColor: item.selected ? theme.btn_bg : 'transparent',
-                },
-              ]}
-            />
-          </Pressable>
-        )}
+        renderItem={({item}) => {
+          const radioStyle = {
+            borderColor: item.selected ? theme.btn_bg : theme.gray,
+            backgroundColor: item.selected ? theme.btn_bg : 'transparent',
+          };
+
+          return (
+            <Pressable
+              style={[styles.row, {borderBottomColor: theme.bg_2}]}
+              onPress={() => select(item.id)}>
+              <Text style={[styles.label, {color: theme.text_1}]}>
+                {item.label}
+              </Text>
+              <View style={[styles.radio, radioStyle]} />
+            </Pressable>
+          );
+        }}
         contentContainerStyle={[styles.list, {backgroundColor: theme.bg_1}]}
         ListFooterComponent={
           <View style={styles.btnWrap}>
