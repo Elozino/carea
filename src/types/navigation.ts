@@ -32,6 +32,8 @@ export type AuthStackParams = {
   CREATE_ACCOUNT: undefined;
   PROFILE_FORM: undefined;
   APP: undefined;
+  ZegoUIKitPrebuiltCallWaitingScreen: undefined;
+  ZegoUIKitPrebuiltCallInCallScreen: undefined;
 };
 
 export type HomeStackParams = {

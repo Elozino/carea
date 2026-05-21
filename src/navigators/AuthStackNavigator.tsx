@@ -16,12 +16,18 @@ import {
   ZegoUIKitPrebuiltCallInCallScreen,
   ZegoUIKitPrebuiltCallWaitingScreen,
 } from '@zegocloud/zego-uikit-prebuilt-call-rn';
+import {AuthStackParams} from '../types/navigation';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<AuthStackParams>();
 
-const AuthStackNavigator = () => {
+type AuthStackNavigatorProps = {
+  initialRouteName?: keyof AuthStackParams;
+};
+
+const AuthStackNavigator = ({initialRouteName}: AuthStackNavigatorProps) => {
   return (
     <Stack.Navigator
+      initialRouteName={initialRouteName}
       screenOptions={{
         headerShown: false,
       }}>

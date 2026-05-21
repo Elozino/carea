@@ -74,6 +74,19 @@ export async function clearTokens(): Promise<void> {
   ]);
 }
 
+export async function hasStoredAuthSession(): Promise<boolean> {
+  try {
+    const [accessToken, refreshToken] = await Promise.all([
+      EncryptedStorage.getItem(ACCESS_TOKEN_KEY),
+      EncryptedStorage.getItem(REFRESH_TOKEN_KEY),
+    ]);
+
+    return Boolean(accessToken || refreshToken);
+  } catch {
+    return false;
+  }
+}
+
 // ---------------------------------------------------------------------------
 // Single-flight token refresh
 // Prevents multiple parallel 401 responses all trying to refresh concurrently.

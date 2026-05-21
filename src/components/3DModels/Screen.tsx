@@ -1,7 +1,7 @@
 import {Canvas} from '@react-three/fiber/native';
 import useControls from 'r3f-native-orbitcontrols';
 import React, {Suspense} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {Porsche} from './Porsche';
 
 function App(): React.JSX.Element {
@@ -9,7 +9,6 @@ function App(): React.JSX.Element {
   return (
     <View style={styles.container}>
       {/* <OnBoardingScreen /> */}
-      <Text>Hi</Text>
       <View style={styles.canvasWrapper} {...events}>
         <Canvas>
           <OrbitControls enablePan={false} />
