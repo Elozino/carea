@@ -3,45 +3,60 @@ name: Carea Android APK
 on:
   push:
     branches:
-      - 'ui'
+      - ui
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 45
+
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
-      - name: Install Java
-        uses: actions/setup-java@v2
+      - name: Setup Java
+        uses: actions/setup-java@v4
         with:
           java-version: '17'
-          distribution: 'adopt'
-          cache: 'gradle'
+          distribution: temurin
 
       - name: Validate Gradle wrapper
-        uses: gradle/wrapper-validation-action@v1
+        uses: gradle/actions/wrapper-validation@v3
 
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: lts/*
+          cache: yarn
 
-      - name: Run Yarn Install
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android SDK components
         run: |
-          yarn install
+          yes | sdkmanager --licenses > /dev/null || true
+          sdkmanager \
+            "platforms;android-34" \
+            "build-tools;34.0.0" \
+            "ndk;25.1.8937393"
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
 
       - name: Fix Gradle wrapper permissions
-        run: |
-          chmod +x android/gradlew
+        run: chmod +x android/gradlew
 
       - name: Build Application
-        run: |
-          cd android
-          ./gradlew assembleRelease
+        working-directory: android
+        run: ./gradlew assembleRelease --no-daemon
 
       - name: Upload Application
         uses: actions/upload-artifact@v4
         with:
           name: app-release
           path: android/app/build/outputs/apk/release/app-release.apk
+          if-no-files-found: error
